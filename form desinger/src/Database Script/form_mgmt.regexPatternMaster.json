@@ -1,0 +1,57 @@
+db.regexPatternMaster.insertMany([
+  {
+    validationType: "Characters (Letters Only)",
+    regexPattern: "^[A-Za-z]+$",
+    description: "Allows only letters (A–Z). No numbers or special characters."
+  },
+  {
+    validationType: "Alphanumeric (with space)",
+    regexPattern: "^[A-Za-z0-9\\s]+$",
+    description: "Allows letters, numbers, and spaces."
+  },
+  {
+    validationType: "Alphanumeric",
+    regexPattern: "^[A-Za-z0-9]+$",
+    description: "Allows only letters and numbers (no spaces)."
+  },
+  {
+    validationType: "Whole Number",
+    regexPattern: "^[0-9]+$",
+    description: "Allows only positive integers (no decimals)."
+  },
+  {
+    validationType: "Integer (±)",
+    regexPattern: "^-?[0-9]+$",
+    description: "Allows positive and negative whole numbers."
+  },
+  {
+    validationType: "Decimal Number",
+    regexPattern: "^[0-9]+(\\.[0-9]+)?$",
+    description: "Allows numbers with optional decimal values."
+  },
+  {
+    validationType: "Decimal (±)",
+    regexPattern: "^-?[0-9]+(\\.[0-9]+)?$",
+    description: "Allows numbers with decimals and negative values."
+  },
+  {
+    validationType: "Name",
+    regexPattern: "^[A-Za-z\\s.]+$",
+    description: "Allows letters, spaces, and dots."
+  },
+  {
+    validationType: "Email",
+    regexPattern: "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+    description: "Validates standard email format."
+  },
+  {
+    validationType: "Mobile",
+    regexPattern: "^[6-9][0-9]{9}$",
+    description: "Ensures a valid 10-digit mobile number."
+  },
+  {
+    validationType: "PAN Card",
+    regexPattern: "^[A-Z]{5}[0-9]{4}[A-Z]{1}$",
+    description: "Validates PAN format (5 letters, 4 digits, 1 letter)."
+  }
+]);

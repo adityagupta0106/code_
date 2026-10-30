@@ -1,0 +1,12 @@
+db.languageMaster.insertMany([{
+  "_id": "en",
+  "langName": "English",
+  "langShortName": "en",
+  "_class": "com.serviceplus.formDesigner.request.model.LanguageMaster"
+},
+{
+  "_id": "hi",
+  "langName": "Hindi",
+  "langShortName": "hi",
+  "_class": "com.serviceplus.formDesigner.request.model.LanguageMaster"
+}])

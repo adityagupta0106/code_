@@ -1,0 +1,7425 @@
+db.fieldJSONMaster.insertMany([{
+  "typeId": 1,
+  "json": {
+    "typeId": 1,
+    "name": "TextInput",
+    "icon": "TextIcon",
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus",
+        "autoCapitalize"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "spellcheck",
+        "pattern",
+        "autoComplete",
+        "maxLength",
+        "minLength"
+      ]
+    },
+    "htmlTag": {
+      "tag": "input",
+      "selfClose": true,
+      "attributes": {
+        "type": "text"
+      }
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "baseStyles": {},
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 10
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 11
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "minLength": {
+        "type": "number",
+        "value": null,
+        "label": "Minimum Length",
+        "placeholder": "Provide Minimum length",
+        "sortOrder": 2
+      },
+      "maxLength": {
+        "type": "number",
+        "value": null,
+        "label": "Maximum Length",
+        "placeholder": "Provide Maximum length",
+        "sortOrder": 3
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 4
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoComplete": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Autocomplete",
+        "htmlValue": "on",
+        "htmlFalseValue": "off",
+        "sortOrder": 9
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 2,
+  "json": {
+    "typeId": 2,
+    "name": "Number Input",
+    "icon": "KeyboardIcon",
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus",
+        "autoCapitalize"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "autoComplete",
+        "max",
+        "min",
+        "pattern"
+      ]
+    },
+    "htmlTag": {
+      "tag": "input",
+      "selfClose": true,
+      "attributes": {
+        "type": "number"
+      }
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "label",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 10
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 11
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "min": {
+        "type": "number",
+        "value": null,
+        "label": "Minimum Number",
+        "sortOrder": 2
+      },
+      "max": {
+        "type": "number",
+        "value": null,
+        "label": "Maximum Maximum",
+        "sortOrder": 3
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 4
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoComplete": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Autocomplete",
+        "htmlValue": "on",
+        "htmlFalseValue": "off",
+        "sortOrder": 9
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 3,
+  "json": {
+    "typeId": 3,
+    "name": "Email Input",
+    "icon": "EnvelopeClosedIcon",
+    "htmlTag": {
+      "tag": "input",
+      "selfClose": true,
+      "attributes": {
+        "type": "email"
+      }
+    },
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "spellcheck",
+        "pattern",
+        "autoComplete",
+        "maxLength",
+        "minLength",
+        "multiple"
+      ]
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 10
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 11
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "minLength": {
+        "type": "number",
+        "value": 0,
+        "label": "Minimum Length",
+        "sortOrder": 2
+      },
+      "maxLength": {
+        "type": "number",
+        "value": 100,
+        "label": "Maximum Length",
+        "sortOrder": 3
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 4
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "multiple": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Allow multiple email?",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "autoComplete": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Autocomplete",
+        "htmlValue": "on",
+        "htmlFalseValue": "off",
+        "sortOrder": 10
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 4,
+  "json": {
+    "typeId": 4,
+    "name": "Textarea",
+    "icon": "TextAlignJustifyIcon",
+    "htmlTag": {
+      "tag": "textarea",
+      "selfClose": false
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "parentId": null,
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "spellcheck",
+        "pattern",
+        "autoComplete",
+        "maxLength",
+        "minLength"
+      ]
+    },
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "rows": {
+        "type": "number",
+        "label": "Rows",
+        "value": 5,
+        "sortOrder": 8
+      },
+      "cols": {
+        "type": "number",
+        "label": "Columns",
+        "value": 40,
+        "sortOrder": 9
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 10
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 11
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 12
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 13
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "minLength": {
+        "type": "number",
+        "value": 0,
+        "label": "Minimum Length",
+        "sortOrder": 2
+      },
+      "maxLength": {
+        "type": "number",
+        "value": 100,
+        "label": "Maximum Length",
+        "sortOrder": 3
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 4
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoComplete": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Autocomplete",
+        "htmlValue": "on",
+        "htmlFalseValue": "off",
+        "sortOrder": 9
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 5,
+  "json": {
+    "typeId": 5,
+    "name": "Select",
+    "icon": "SelectIcon",
+    "htmlTag": {
+      "tag": "select",
+      "selfClose": false,
+      "hasChildrenFromData": true
+    },
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "pattern"
+      ]
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 10
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 11
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 2
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 3
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 4
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    },
+    "dataSettings": {
+      "parent": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Does it have a parent?",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 1
+      },
+      "selectParent": {
+        "type": "select",
+        "label": "Select the parent",
+        "value": "",
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "parent",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "query": [
+          "select",
+          "SelectComponent",
+          "radio",
+          "checkbox"
+        ],
+        "sortOrder": 2
+      },
+      "options": {
+        "type": "row",
+        "value": [],
+        "sortOrder": 3
+      }
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 6,
+  "json": {
+    "typeId": 6,
+    "name": "Radio Group",
+    "icon": "RadiobuttonIcon",
+    "htmlTag": {
+      "tag": "div",
+      "selfClose": false,
+      "hasChildrenFromData": true,
+      "childType": "radio"
+    },
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "pattern"
+      ]
+    },
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "layout": {
+        "type": "select",
+        "value": "vertical",
+        "label": "Layout",
+        "options": [
+          {
+            "value": "vertical",
+            "label": "Vertical"
+          },
+          {
+            "value": "horizontal",
+            "label": "Horizontal"
+          }
+        ],
+        "sortOrder": 8
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 10
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 11
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 12
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "requiredGroup": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 2
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 3
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 4
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    },
+    "dataSettings": {
+      "parent": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Does it have a parent?",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 1
+      },
+      "selectParent": {
+        "type": "select",
+        "label": "Select the parent",
+        "value": "",
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "parent",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "query": [
+          "select",
+          "SelectComponent",
+          "radio",
+          "checkbox"
+        ],
+        "sortOrder": 2
+      },
+      "options": {
+        "type": "row",
+        "value": [],
+        "sortOrder": 3
+      }
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 7,
+  "json": {
+    "typeId": 7,
+    "name": "Checkbox Group",
+    "icon": "CheckboxIcon",
+    "htmlTag": {
+      "tag": "div",
+      "selfClose": false,
+      "hasChildrenFromData": true,
+      "childType": "checkbox"
+    },
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "pattern"
+      ]
+    },
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "layout": {
+        "type": "select",
+        "value": "vertical",
+        "label": "Layout",
+        "options": [
+          {
+            "value": "vertical",
+            "label": "Vertical"
+          },
+          {
+            "value": "horizontal",
+            "label": "Horizontal"
+          }
+        ],
+        "sortOrder": 8
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 10
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 11
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 12
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "requiredGroup": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 2
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 3
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 4
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    },
+    "dataSettings": {
+      "parent": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Does it have a parent?",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 1
+      },
+      "selectParent": {
+        "type": "select",
+        "label": "Select the parent",
+        "value": "",
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "parent",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "query": [
+          "select",
+          "SelectComponent",
+          "div",
+          "checkbox"
+        ],
+        "sortOrder": 2
+      },
+      "options": {
+        "type": "row",
+        "value": [],
+        "sortOrder": 3
+      }
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 8,
+  "json": {
+    "typeId": 8,
+    "name": "date",
+    "icon": "CalendarIcon",
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "pattern",
+        "min",
+        "max"
+      ]
+    },
+    "htmlTag": {
+      "tag": "input",
+      "selfClose": true,
+      "attributes": {
+        "type": "date"
+      }
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 4
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 5
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 6
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 8
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 9
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "min": {
+        "type": "date",
+        "value": "",
+        "label": "Minimum Date",
+        "sortOrder": 2
+      },
+      "max": {
+        "type": "date",
+        "value": "",
+        "label": "Maximum Date",
+        "sortOrder": 3
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 4
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 17,
+  "json": {
+    "typeId": 17,
+    "name": "State",
+    "htmlTag": {
+      "tag": "SelectLGD"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 2
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 3
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 4
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "icon": "TbLetterS"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 18,
+  "json": {
+    "typeId": 18,
+    "name": "District",
+    "htmlTag": {
+      "tag": "SelectLGD"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "dataSettings": {
+      "parentState": {
+        "type": "select",
+        "value": "",
+        "label": "State",
+        "enableQuery": "showAllState",
+        "enableCondition": "allState",
+        "sortOrder": 1
+      },
+      "standalone": {
+        "type": "select",
+        "value": "true",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "false"
+          },
+          {
+            "label": "No",
+            "value": "true"
+          }
+        ],
+        "label": "Is it dependent",
+        "tooltip": "Is it dependent on a parent hierarchy?",
+        "sortOrder": 2
+      },
+      "dependentParentLGDField": {
+        "type": "select",
+        "value": "",
+        "label": "Select the LGD parent",
+        "enableCondition": "lgdMapping",
+        "hierarchy": [
+          17
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "standalone",
+              "operator": "notEquals",
+              "value": "true"
+            }
+          ]
+        },
+        "sortOrder": 3
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "icon": "TbLetterD"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 19,
+  "json": {
+    "typeId": 19,
+    "name": "Sub district",
+    "htmlTag": {
+      "tag": "SelectLGD"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "dataSettings": {
+      "parentState": {
+        "type": "select",
+        "value": "",
+        "label": "State",
+        "enableQuery": "showAllState",
+        "enableCondition": "allState",
+        "sortOrder": 1
+      },
+      "standalone": {
+        "type": "select",
+        "value": "true",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "false"
+          },
+          {
+            "label": "No",
+            "value": "true"
+          }
+        ],
+        "label": "Is it dependent",
+        "tooltip": "Is it dependent on a parent hierarchy?",
+        "sortOrder": 2
+      },
+      "dependentParentLGDField": {
+        "type": "select",
+        "value": "",
+        "label": "Select the LGD parent",
+        "enableCondition": "lgdMapping",
+        "hierarchy": [
+          17,
+          18
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "standalone",
+              "operator": "notEquals",
+              "value": "true"
+            }
+          ]
+        },
+        "sortOrder": 3
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "icon": "PiSubtract"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 20,
+  "json": {
+    "typeId": 20,
+    "name": "Village",
+    "htmlTag": {
+      "tag": "SelectLGD"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "dataSettings": {
+      "parentState": {
+        "type": "select",
+        "value": "",
+        "label": "State",
+        "enableQuery": "showAllState",
+        "enableCondition": "allState",
+        "sortOrder": 1
+      },
+      "standalone": {
+        "type": "select",
+        "value": "true",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "false"
+          },
+          {
+            "label": "No",
+            "value": "true"
+          }
+        ],
+        "label": "Is it dependent",
+        "tooltip": "Is it dependent on a parent hierarchy?",
+        "sortOrder": 2
+      },
+      "dependentParentLGDField": {
+        "type": "select",
+        "value": "",
+        "label": "Select the LGD parent",
+        "enableCondition": "lgdMapping",
+        "hierarchy": [
+          17,
+          18,
+          19
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "standalone",
+              "operator": "notEquals",
+              "value": "true"
+            }
+          ]
+        },
+        "sortOrder": 3
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "icon": "GiVillage"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 21,
+  "json": {
+    "typeId": 21,
+    "name": "Block",
+    "htmlTag": {
+      "tag": "SelectLGD"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "dataSettings": {
+      "parentState": {
+        "type": "select",
+        "value": "",
+        "label": "State",
+        "enableQuery": "showAllState",
+        "enableCondition": "allState",
+        "sortOrder": 1
+      },
+      "standalone": {
+        "type": "select",
+        "value": "true",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "false"
+          },
+          {
+            "label": "No",
+            "value": "true"
+          }
+        ],
+        "label": "Is it dependent",
+        "tooltip": "Is it dependent on a parent hierarchy?",
+        "sortOrder": 2
+      },
+      "dependentParentLGDField": {
+        "type": "select",
+        "value": "",
+        "label": "Select the LGD parent",
+        "enableCondition": "lgdMapping",
+        "hierarchy": [
+          17,
+          18,
+          19
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "standalone",
+              "operator": "notEquals",
+              "value": "true"
+            }
+          ]
+        },
+        "sortOrder": 3
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "icon": "TbLetterB"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 22,
+  "json": {
+    "typeId": 22,
+    "name": "Local Body",
+    "htmlTag": {
+      "tag": "LocalBodySelector"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "tooltip": "Label of the field",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "dataSettings": {
+      "dataCapture": {
+        "type": "lgd",
+        "render": "local",
+        "sortOrder": 1
+      },
+      "state": {
+        "value": "",
+        "sortOrder": 2
+      },
+      "localBody": {
+        "value": {},
+        "sortOrder": 3
+      },
+      "standalone": {
+        "type": "select",
+        "value": "true",
+        "options": [
+          {
+            "label": "Yes",
+            "value": "false"
+          },
+          {
+            "label": "No",
+            "value": "true"
+          }
+        ],
+        "label": "Is it dependent",
+        "tooltip": "Is it dependent on a parent hierarchy?",
+        "sortOrder": 4
+      },
+      "dependentParentLGDField": {
+        "type": "select",
+        "value": "",
+        "label": "Select the LGD parent",
+        "enableCondition": "lgdMapping",
+        "hierarchy": [
+          22
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "standalone",
+              "operator": "notEquals",
+              "value": "true"
+            }
+          ]
+        },
+        "sortOrder": 5
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "icon": "RiGovernmentLine"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 23,
+  "json": {
+    "typeId": 23,
+    "name": "Line Department",
+    "htmlTag": {
+      "tag": "LineDepartmentSelector"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "dataSettings": {
+      "dataCapture": {
+        "type": "lgd",
+        "render": "line",
+        "sortOrder": 1
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "icon": "MdOutlineAccountBalance"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 40,
+  "json": {
+    "typeId": 40,
+    "label": "Advanced Select",
+    "icon": "HeightIcon",
+    "htmlTag": {
+      "tag": "SelectComponent"
+    },
+    "component": true,
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "multiple": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Use as multi select",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 9
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 10
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 11
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 12
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 2
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 3
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 4
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "dataSettings": {
+      "parent": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Does it have a parent?",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 1
+      },
+      "selectParent": {
+        "type": "select",
+        "label": "Select the parent",
+        "value": "",
+        "visibility": {
+          "when": [
+            {
+              "tab": "dataSettings",
+              "key": "parent",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "query": [
+          "select",
+          "SelectComponent",
+          "radio",
+          "checkbox"
+        ],
+        "sortOrder": 2
+      },
+      "options": {
+        "type": "row",
+        "value": [],
+        "sortOrder": 3
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    },
+    "name": "Select"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 41,
+  "json": {
+    "typeId": 41,
+    "name": "Section",
+    "icon": "LayoutIcon",
+    "htmlTag": {
+      "tag": "section",
+      "selfClose": false
+    },
+    "component": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 2
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 3
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 4
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 5
+      }
+    },
+    "styleSettings": {
+      "cols": {
+        "label": "Number of columns",
+        "type": "number",
+        "value": 1,
+        "sortOrder": 1
+      },
+      "droppableRows": {
+        "label": "Number of rows",
+        "type": "number",
+        "value": 1,
+        "sortOrder": 2
+      },
+      "customClass": {
+        "label": "Container class",
+        "type": "textField",
+        "value": "",
+        "sortOrder": 3
+      }
+    },
+    "parentId": null,
+    "zones": [
+      [
+        []
+      ]
+    ]
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 42,
+  "json": {
+    "typeId": 42,
+    "name": "HTML",
+    "icon": "TfiHtml5",
+    "htmlTag": {
+      "tag": "HtmlComponent"
+    },
+    "component": true,
+    "displaySettings": {
+      "editorMode": {
+        "label": "Editor Mode",
+        "type": "select",
+        "value": "RTE",
+        "options": [
+          {
+            "value": "RTE",
+            "label": "Rich Text Editor"
+          },
+          {
+            "value": "CE",
+            "label": "Code Editor"
+          }
+        ],
+        "sortOrder": 1
+      },
+      "html_": {
+        "type": "codeEditor",
+        "value": "<!---<h1>Create your html freely</h1>--->",
+        "label": "Write your html",
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "editorMode",
+              "operator": "notEquals",
+              "value": "RTE"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 2
+      },
+      "rte_": {
+        "type": "richTextEditor",
+        "value": "",
+        "label": "Design",
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "editorMode",
+              "operator": "notEquals",
+              "value": "CE"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 3
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 4
+      }
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 43,
+  "json": {
+    "typeId": 43,
+    "name": "Page Break",
+    "icon": "BorderStyleIcon",
+    "htmlTag": {
+      "tag": "pageBreak"
+    },
+    "component": true,
+    "configurable": false,
+    "onlyTopLevelDrop": true
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 44,
+  "json": {
+    "typeId": 44,
+    "name": "Dynamic Row",
+    "htmlTag": {
+      "tag": "dynamicRow"
+    },
+    "component": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 2
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 3
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "sortOrder": 4
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 5
+      },
+      "minRows": {
+        "type": "number",
+        "value": 1,
+        "label": "Minimum Number Of Rows Allowed",
+        "sortOrder": 6
+      },
+      "maxRows": {
+        "type": "number",
+        "value": 50,
+        "label": "Maximum Number Of Rows Allowed",
+        "sortOrder": 7
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 8
+      }
+    },
+    "styleSettings": {
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class container",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 1
+      }
+    },
+    "parentId": null,
+    "zones": [
+      [
+        []
+      ]
+    ],
+    "icon": "SectionIcon"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 45,
+  "json": {
+    "typeId": 45,
+    "name": "File / Camera",
+    "icon": "CameraIcon",
+    "htmlTag": {
+      "tag": "FileCameraComponent"
+    },
+    "component": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "sortOrder": 8
+      },
+      "camera": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Use As Camera",
+        "sortOrder": 9
+      },
+      "fileCamera": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Show As File And Camera",
+        "sortOrder": 10
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 11
+      }
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 46,
+  "json": {
+    "typeId": 46,
+    "name": "Rich Text Editor",
+    "icon": "IdCardIcon",
+    "htmlTag": {
+      "tag": "RichTextEditor"
+    },
+    "component": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 8
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 9
+      }
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 80,
+  "json": {
+    "typeId": 80,
+    "name": "first name",
+    "constUid": "spConst_fname",
+    "allowedAttributes": {
+      "displaySettings": [
+        "placeholder",
+        "hidden",
+        "autoFocus",
+        "autoCapitalize"
+      ],
+      "validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "spellcheck",
+        "pattern",
+        "autoComplete",
+        "maxLength",
+        "minLength"
+      ]
+    },
+    "instantiable": false,
+    "htmlTag": {
+      "tag": "input",
+      "selfClose": true,
+      "attributes": {
+        "type": "text"
+      }
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "baseStyles": {},
+    "parentId": null,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 2
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 3
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 4
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 5
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 6
+      },
+      "hidden": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Hidden Field",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "saveToServer": {
+        "type": "checkbox",
+        "value": true,
+        "label": "Save to server",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "tooltip": "Input from this field will be saved on form submission",
+        "sortOrder": 9
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 10
+      }
+    },
+    "validationSettings": {
+      "errorLabel": {
+        "type": "textField",
+        "value": "",
+        "label": "Default Error Message",
+        "placeholder": "Provide a default error message",
+        "sortOrder": 1
+      },
+      "minLength": {
+        "type": "number",
+        "value": null,
+        "label": "Minimum Length",
+        "placeholder": "Provide Minimum length",
+        "sortOrder": 2
+      },
+      "maxLength": {
+        "type": "number",
+        "value": null,
+        "label": "Maximum Length",
+        "placeholder": "Provide Maximum length",
+        "sortOrder": 3
+      },
+      "pattern": {
+        "type": "textArea",
+        "value": "",
+        "label": "Regex Pattern",
+        "placeholder": "Provide regex pattern for custom validation",
+        "sortOrder": 4
+      },
+      "required": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Required",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 5
+      },
+      "readOnly": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Read Only",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 6
+      },
+      "disabled": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Disabled",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 7
+      },
+      "uniqueStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Unique Status",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "autoComplete": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Autocomplete",
+        "htmlValue": "on",
+        "htmlFalseValue": "off",
+        "sortOrder": 9
+      }
+    },
+    "styleSettings": {
+      "width": {
+        "type": "number",
+        "value": 100,
+        "label": "Width",
+        "colspan": 3,
+        "sortOrder": 1
+      },
+      "widthUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "options": [
+          {
+            "value": "px",
+            "label": "Pixels"
+          },
+          {
+            "value": "%",
+            "label": "Percentage"
+          }
+        ],
+        "colspan": 1,
+        "sortOrder": 2
+      },
+      "labelColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Label Color",
+        "sortOrder": 3
+      },
+      "backgroundColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Field Background Color",
+        "sortOrder": 4
+      },
+      "textColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Field Text Color",
+        "sortOrder": 5
+      },
+      "descriptionColor": {
+        "type": "color",
+        "value": "#000",
+        "label": "Description Color",
+        "sortOrder": 6
+      },
+      "containerColor": {
+        "type": "color",
+        "value": "#fff",
+        "label": "Container Background Color",
+        "colspan": 4,
+        "sortOrder": 7
+      },
+      "customClass": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (container)",
+        "placeholder": "bg-slate-600 p-2 m-2",
+        "sortOrder": 8
+      },
+      "customClassEl": {
+        "type": "textArea",
+        "value": "",
+        "label": "Custom class (field)",
+        "placeholder": "text-red-200 border border-yellow-500",
+        "sortOrder": 9
+      }
+    },
+    "apiSettings": {
+      "actionCreators": []
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 100,
+  "json": {
+    "typeId": 100,
+    "name": "Action",
+    "htmlTag": {
+      "tag": "SelectComponent"
+    },
+    "component": true,
+    "parentId": null,
+    "isActionElement": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "autoFocus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Initial Focus",
+        "htmlValue": true,
+        "htmlFalseValue": false,
+        "sortOrder": 8
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 9
+      }
+    },
+    "icon": "PaperPlaneIcon"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 101,
+  "json": {
+    "typeId": 101,
+    "name": "Task",
+    "htmlTag": {
+      "tag": "SelectComponent"
+    },
+    "component": true,
+    "parentId": null,
+    "instantiable": false,
+    "isActionElement": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "icon": "Pencil2Icon"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 103,
+  "json": {
+    "typeId": 103,
+    "name": "Users",
+    "htmlTag": {
+      "tag": "div",
+      "selfClose": false,
+      "children": [
+        {
+          "tag": "p",
+          "selfClose": false,
+          "innerText": "Users will be populated here.",
+          "attributes": {
+            "className": "bg-stone-100 p-2 border border-slate-400"
+          }
+        },
+        {
+          "tag": "p",
+          "selfClose": false,
+          "innerText": "Render type can be configured when mapping with a task",
+          "attributes": {
+            "className": "text-slate-800 text-sm"
+          }
+        }
+      ]
+    },
+    "parentId": null,
+    "isActionElement": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 4
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 5
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 6
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 7
+      }
+    },
+    "icon": "PersonIcon"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+},
+{
+  "typeId": 104,
+  "json": {
+    "typeId": 104,
+    "name": "Remarks",
+    "htmlTag": {
+      "tag": "textarea",
+      "selfClose": false
+    },
+    "baseClasses": "border border-slate-400 w-full px-2 py-1 rounded",
+    "parentId": null,
+    "isActionElement": true,
+    "displaySettings": {
+      "label": {
+        "type": "textField",
+        "value": "",
+        "label": "Field Label",
+        "placeholder": "Enter Field Label",
+        "sortOrder": 1
+      },
+      "configId": {
+        "type": "textField",
+        "value": "",
+        "label": "Id",
+        "sortOrder": 2
+      },
+      "labelPosition": {
+        "type": "select",
+        "value": "top",
+        "label": "Label Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          }
+        ],
+        "sortOrder": 3
+      },
+      "placeholder": {
+        "type": "textField",
+        "value": "",
+        "label": "Placeholder",
+        "placeholder": "Enter placeholder text",
+        "sortOrder": 4
+      },
+      "description": {
+        "type": "textArea",
+        "value": "",
+        "label": "Description of Element",
+        "placeholder": "Tell the user about the element",
+        "sortOrder": 5
+      },
+      "descriptionPosition": {
+        "type": "select",
+        "value": "bottom",
+        "label": "Description Position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "visibility": {
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "description",
+              "operator": "truthy"
+            }
+          ],
+          "clearOnHide": true
+        },
+        "sortOrder": 6
+      },
+      "tooltip": {
+        "type": "textField",
+        "value": "",
+        "label": "Tooltip",
+        "placeholder": "Enter tooltip content",
+        "sortOrder": 7
+      },
+      "dataRestStatus": {
+        "type": "checkbox",
+        "value": false,
+        "label": "Encryption of Data at Rest ",
+        "htmlValue": false,
+        "htmlFalseValue": false,
+        "tooltip": "Data entered in this field will be stored in encrypted form",
+        "sortOrder": 8
+      }
+    },
+    "icon": "ChatBubbleIcon"
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+}
+])
+
+
+//--------------------------------------------------------
+// 0041376: SPPROD20: Dropdown Field – Observed Issues
+// Date: 27-Apr-2026
+//--------------------------------------------------------
+
+db.fieldJSONMaster.updateMany(
+  { 
+    typeId: { $in: [6, 7, 40] },
+    "json.dataSettings.options.enableSort": { $exists: false }
+  },
+  {
+    $set: {
+      "json.dataSettings.options.enableSort": true
+    }
+  }
+)
+
+//----------------------------------------------------------------------------------------------------------------
+// 0041357: SPProd20: Textarea Field – Error on Property Change and Misleading Rows/Columns Labels
+// Date: 27-Apr-2026
+//----------------------------------------------------------------------------------------------------------------
+db.fieldJSONMaster.updateMany(
+  { typeId: 4 },
+  {
+    $addToSet: {
+      "json.allowedAttributes.displaySettings": "rows"
+    },
+	$unset: {
+      "json.displaySettings.cols": ""
+    }
+  }
+)
+
+//----------------------------------------------------------------------------------------------------------------
+// 0042793: SP 2.0 || Incorrect Label displayed in the Number input setting.
+// Date: 29-Apr-2026
+//----------------------------------------------------------------------------------------------------------------
+
+db.fieldJSONMaster.updateMany(
+  { "json.typeId": 2 },
+  {
+    $set: {
+      "json.validationSettings.min.label": "Minimum Value",
+      "json.validationSettings.max.label": "Maximum Value"
+    }
+  }
+);
+
+//----------------------------------------------------------------------------------------------------------------
+// 0042855: Update master for type id 45. Find the attached JSON5 file
+// Date: 06-May-2026
+//----------------------------------------------------------------------------------------------------------------
+db.fieldJSONMaster.updateMany(
+  { typeId: 45 },
+  {
+    $set: {
+      json: {
+        "typeId": 45,
+        "name": "File / Camera",
+        "icon": "CameraIcon",
+        "htmlTag": {
+          "tag": "FileCameraComponent"
+        },
+        "parentId": null,
+        "allowedAttributes": {
+          "validationSettings": [
+            "maxFileSize",
+            "minFileSize"
+          ]
+        },
+        "component": true,
+        "displaySettings": {
+          "label": {
+            "type": "textField",
+            "value": "",
+            "label": "Field Label",
+            "placeholder": "Enter Field Label",
+            "sortOrder": 1
+          },
+          "configId": {
+            "type": "textField",
+            "value": "",
+            "label": "Id",
+            "sortOrder": 2
+          },
+          "labelPosition": {
+            "type": "select",
+            "value": "top",
+            "label": "Label position",
+            "options": [
+              { "value": "top", "label": "Top" },
+              { "value": "left", "label": "Left" },
+              { "value": "right", "label": "Right" },
+              { "value": "bottom", "label": "Bottom" },
+              { "value": "center", "label": "Center" }
+            ],
+            "sortOrder": 3
+          },
+          "placeholder": {
+            "type": "textField",
+            "value": "",
+            "label": "Placeholder",
+            "placeholder": "Enter placeholder text",
+            "sortOrder": 4
+          },
+          "description": {
+            "type": "textArea",
+            "value": "",
+            "label": "Description of Element",
+            "placeholder": "Tell the user about the element",
+            "sortOrder": 5
+          },
+          "descriptionPosition": {
+            "type": "select",
+            "value": "bottom",
+            "label": "Description Position",
+            "options": [
+              { "value": "top", "label": "Top" },
+              { "value": "bottom", "label": "Bottom" }
+            ],
+            "sortOrder": 6
+          },
+          "tooltip": {
+            "type": "textField",
+            "value": "",
+            "label": "Tooltip",
+            "placeholder": "Enter tooltip content",
+            "sortOrder": 7
+          },
+          "required": {
+            "type": "checkbox",
+            "value": false,
+            "label": "Required",
+            "sortOrder": 8
+          },
+          "fileCamera": {
+            "type": "checkbox",
+            "value": false,
+            "label": "Enable Camera",
+            "sortOrder": 9
+          },
+          "recommend": {
+            "type": "checkbox",
+            "value": false,
+            "label": "Do you want to Recommend Document(s)",
+            "tooltip": "You may provide document recommendations",
+            "sortOrder": 10
+          },
+          "recommendedSelection": {
+            "type": "select",
+            "multi": true,
+            "value": "top",
+            "label": "Select Documents to Recommend",
+            "enableQuery": "getRecommendedDocs",
+            "enableCondition": "recommend",
+            "visibility": {
+              "when": [
+                {
+                  "tab": "displaySettings",
+                  "key": "recommend",
+                  "operator": "truthy"
+                }
+              ],
+              "clearOnHide": true
+            },
+            "sortOrder": 11
+          },
+          "rejectionAllowed": {
+            "type": "checkbox",
+            "value": false,
+            "label": "Is Rejection Allowed?",
+            "sortOrder": 12
+          },
+          "dataRestStatus": {
+            "type": "checkbox",
+            "value": false,
+            "label": "Encryption of Data at Rest ",
+            "htmlValue": false,
+            "htmlFalseValue": false,
+            "tooltip": "Data entered in this field will be stored in encrypted form",
+            "sortOrder": 13
+          }
+        },
+        "validationSettings": {
+          "maxFileSize": {
+            "type": "number",
+            "value": "",
+            "label": "Max File Size(KB)",
+            "placeholder": "Enter max file size",
+            "sortOrder": 1
+          },
+          "minFileSize": {
+            "type": "number",
+            "value": "",
+            "label": "Min File Size(KB)",
+            "placeholder": "Enter min file size",
+            "sortOrder": 2
+          }
+        }
+      }
+    }
+  }
+)
+//----------------------------------------------------------------------------------------------------------------
+// 0042854: SP 2.0 | Form Management Module
+// Date: 11-May-2026
+//----------------------------------------------------------------------------------------------------------------
+db.fieldJSONMaster.updateMany(
+  { typeId: 100 },
+  {
+    $set: {
+      "json.instantiable": false,
+      "json.allowedAttributes": {
+        "displaySettings": [
+          "required"
+        ]
+      },
+      "json.dataSettings": {
+        "options": {
+          "type": "actions",
+          "label": "Enable the Actions which the official can take",
+          "enableQuery": "getActions",
+          "enableCondition": "always",
+          "value": [],
+          "sortOrder": 1
+        }
+      },
+      "json.apiSettings": {
+        "actionCreators": []
+      }
+    }
+  }
+)
+//----------------------------------------------------------------------------------------------------------------
+// 0042797: SP 2.0 ||Form Builder: Predefined regex patterns should be available for selection during field-level input validation
+// Date: 25-May-2026
+//----------------------------------------------------------------------------------------------------------------
+db.fieldJSONMaster.updateMany(
+  { typeId: 1 },
+  {
+    $set: {
+      "json.allowedAttributes.validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "spellcheck",
+        "pattern",
+        "regex",
+        "autoComplete",
+        "maxLength",
+        "minLength"
+      ],
+
+      "json.validationSettings.regex": {
+        "type": "select",
+        "value": "",
+        "label": "Regex Validation",
+        "enableQuery": "getRegexPatterns",
+        "enableCondition": "regex",
+        "substitute": "pattern",
+        "tooltip": "Regular expression pattern for validation",
+        "sortOrder": 4
+      },
+
+      "json.validationSettings.pattern.tooltip": "Custom Regular expression pattern for validation",
+
+      "json.validationSettings.pattern.label": "Custom Regex Validation",
+
+      "json.validationSettings.pattern.sortOrder": 5,
+
+      "json.validationSettings.required.sortOrder": 6,
+
+      "json.validationSettings.readOnly.sortOrder": 7,
+
+      "json.validationSettings.disabled.sortOrder": 8,
+
+      "json.validationSettings.uniqueStatus.sortOrder": 9,
+
+      "json.validationSettings.autoComplete.sortOrder": 10
+    }
+  }
+)
+
+
+
+db.fieldJSONMaster.updateMany(
+  { typeId: 2 },
+  {
+    $set: {
+      "json.allowedAttributes.validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "autoComplete",
+        "max",
+        "min",
+        "pattern",
+        "regex"
+      ],
+
+      "json.validationSettings.regex": {
+        "type": "select",
+        "value": "",
+        "label": "Regex Validation",
+        "enableQuery": "getRegexPatterns",
+        "enableCondition": "regex",
+        "substitute": "pattern",
+        "tooltip": "Regular expression pattern for validation",
+        "sortOrder": 4
+      },
+
+      "json.validationSettings.pattern.tooltip": "Custom Regular expression pattern for validation",
+
+      "json.validationSettings.pattern.label": "Custom Regex Validation",
+
+      "json.validationSettings.pattern.sortOrder": 5,
+
+      "json.validationSettings.required.sortOrder": 6,
+
+      "json.validationSettings.readOnly.sortOrder": 7,
+
+      "json.validationSettings.disabled.sortOrder": 8,
+
+      "json.validationSettings.uniqueStatus.sortOrder": 9,
+
+      "json.validationSettings.autoComplete.sortOrder": 10
+    }
+  }
+)
+
+
+db.fieldJSONMaster.updateMany(
+  { typeId: 3 },
+  {
+    $set: {
+      "json.allowedAttributes.validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "spellcheck",
+        "pattern",
+        "regex",
+		"autoComplete",
+        "maxLength",
+        "minLength",
+        "multiple"
+      ],
+
+      "json.validationSettings.regex": {
+        "type": "select",
+        "value": "",
+        "label": "Regex Validation",
+        "enableQuery": "getRegexPatterns",
+        "enableCondition": "regex",
+        "substitute": "pattern",
+        "tooltip": "Regular expression pattern for validation",
+        "sortOrder": 4
+      },
+
+      "json.validationSettings.pattern.tooltip": "Custom Regular expression pattern for validation",
+
+      "json.validationSettings.pattern.label": "Custom Regex Validation",
+
+      "json.validationSettings.pattern.sortOrder": 5,
+
+      "json.validationSettings.required.sortOrder": 6,
+
+      "json.validationSettings.multiple.sortOrder": 7,
+	  
+      "json.validationSettings.readOnly.sortOrder": 8,
+
+      "json.validationSettings.disabled.sortOrder": 9,
+
+      "json.validationSettings.uniqueStatus.sortOrder": 10,
+
+      "json.validationSettings.autoComplete.sortOrder": 11
+    }
+  }
+)
+
+db.fieldJSONMaster.updateMany(
+  { typeId: 4 },
+  {
+    $set: {
+      "json.allowedAttributes.validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "spellcheck",
+        "pattern",
+        "regex",
+		"autoComplete",
+        "maxLength",
+        "minLength"
+      ],
+
+      "json.validationSettings.regex": {
+        "type": "select",
+        "value": "",
+        "label": "Regex Validation",
+        "enableQuery": "getRegexPatterns",
+        "enableCondition": "regex",
+        "substitute": "pattern",
+        "tooltip": "Regular expression pattern for validation",
+        "sortOrder": 4
+      },
+
+      "json.validationSettings.pattern.tooltip": "Custom Regular expression pattern for validation",
+
+      "json.validationSettings.pattern.label": "Custom Regex Validation",
+
+      "json.validationSettings.pattern.sortOrder": 5,
+
+      "json.validationSettings.required.sortOrder": 6,
+	  
+      "json.validationSettings.readOnly.sortOrder": 7,
+
+      "json.validationSettings.disabled.sortOrder": 8,
+
+      "json.validationSettings.uniqueStatus.sortOrder": 9,
+
+      "json.validationSettings.autoComplete.sortOrder": 10
+    }
+  }
+)
+
+db.fieldJSONMaster.updateMany(
+  { typeId: 5 },
+  {
+    $set: {
+      "json.allowedAttributes.validationSettings": [
+        "required",
+        "disabled",
+        "readOnly",
+        "pattern",
+        "regex"
+      ],
+
+      "json.validationSettings.regex": {
+        "type": "select",
+        "value": "",
+        "label": "Regex Validation",
+        "enableQuery": "getRegexPatterns",
+        "enableCondition": "regex",
+        "substitute": "pattern",
+        "tooltip": "Regular expression pattern for validation",
+        "sortOrder": 2
+      },
+
+      "json.validationSettings.pattern.tooltip": "Custom Regular expression pattern for validation",
+
+      "json.validationSettings.pattern.label": "Custom Regex Validation",
+
+      "json.validationSettings.pattern.sortOrder": 3,
+
+      "json.validationSettings.required.sortOrder": 4,
+	  
+      "json.validationSettings.readOnly.sortOrder": 5,
+
+      "json.validationSettings.disabled.sortOrder": 6,
+
+      "json.validationSettings.uniqueStatus.sortOrder": 7
+    }
+  }
+)
+
+db.fieldJSONMaster.updateMany(
+  { 
+    typeId: { $in: [41, 44] } 
+  },
+  {
+    $unset: {
+      "json.displaySettings.saveToServer": ""
+    }
+  }
+)
+//----------------------------------------------------------------------------------------------------------------
+// 0042790: SP 2.0 ||Form Builder: Missing Maximum Field Label Display Length property causing form misalignment.
+// Date: 26-May-2026
+//----------------------------------------------------------------------------------------------------------------
+db.fieldJSONMaster.updateMany(
+  {
+    typeId: { $in: [1, 2, 3, 4, 5, 6, 7, 17, 18, 19, 20, 21, 22, 23, 40] },
+    "json.styleSettings.width": { $exists: true }
+  },
+  {
+    $set: {
+      "json.styleSettings.labelRatio": {
+        "type": "number",
+        "value": 30,
+        "label": "Label Width",
+        "colspan": 3,
+        "visibility": {
+          "logic": "OR",
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "labelPosition",
+              "operator": "equals",
+              "value": "left"
+            },
+            {
+              "tab": "displaySettings",
+              "key": "labelPosition",
+              "operator": "equals",
+              "value": "right"
+            }
+          ]
+        },
+        "sortOrder": 3
+      },
+
+      "json.styleSettings.labelRatioUnit": {
+        "type": "select",
+        "value": "%",
+        "label": "Unit",
+        "colspan": 1,
+        "options": [
+          {
+            "value": "%",
+            "label": "Percentage"
+          },
+          {
+            "value": "px",
+            "label": "Pixels"
+          }
+        ],
+        "visibility": {
+          "logic": "OR",
+          "when": [
+            {
+              "tab": "displaySettings",
+              "key": "labelPosition",
+              "operator": "equals",
+              "value": "left"
+            },
+            {
+              "tab": "displaySettings",
+              "key": "labelPosition",
+              "operator": "equals",
+              "value": "right"
+            }
+          ]
+        },
+        "sortOrder": 4
+      },
+
+      "json.styleSettings.width.label": "Container Width",
+
+      "json.styleSettings.labelColor.sortOrder": 5,
+      "json.styleSettings.backgroundColor.sortOrder": 6,
+      "json.styleSettings.textColor.sortOrder": 7,
+      "json.styleSettings.descriptionColor.sortOrder": 8,
+      "json.styleSettings.containerColor.sortOrder": 9,
+      "json.styleSettings.customClass.sortOrder": 10,
+      "json.styleSettings.customClassEl.sortOrder": 11
+    }
+  }
+)
+//----------------------------------------------------------------------------------------------------------------
+// 0042807: SP 2.0 | New attribute as "Label" in Form Designer
+// Date: 26-May-2026
+//----------------------------------------------------------------------------------------------------------------
+db.fieldTypeMaster.updateOne(
+  {
+    "groupsJsonData.basic.elements.typeId": { $ne: 48 }
+  },
+  {
+    $push: {
+      "groupsJsonData.basic.elements": {
+        "typeId": 48,
+        "icon": "LetterCaseCapitalizeIcon",
+        "label": "Label",
+        "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+        "sortOrder": 11
+      }
+    }
+  }
+)
+
+db.fieldJSONMaster.insertOne({
+  "typeId": 48,
+  "json": {
+        "typeId": 48,
+        "name": "Label",
+        "icon": "LetterCaseCapitalizeIcon",
+        "htmlTag": {
+          "tag": "label",
+          "selfClose": false
+        },
+        "baseClasses": "border border-slate-200 w-full px-2 py-1 rounded",
+        "baseStyles": {},
+        "parentId": null,
+        "displaySettings": {
+          "label": {
+            "type": "textField",
+            "value": "",
+            "label": "Field Label",
+            "placeholder": "Enter Field Label",
+            "sortOrder": 1
+          },
+          "configId": {
+            "type": "textField",
+            "value": "",
+            "label": "Id",
+            "sortOrder": 2
+          }
+        },
+        "styleSettings": {
+          "width": {
+            "type": "number",
+            "value": 100,
+            "label": "Width",
+            "colspan": 3,
+            "sortOrder": 1
+          },
+          "widthUnit": {
+            "type": "select",
+            "value": "%",
+            "label": "Unit",
+            "options": [
+              {
+                "value": "px",
+                "label": "Pixels"
+              },
+              {
+                "value": "%",
+                "label": "Percentage"
+              }
+            ],
+            "colspan": 1,
+            "sortOrder": 2
+          },
+          "backgroundColor": {
+            "type": "color",
+            "value": "#fff",
+            "label": "Field Background Color",
+            "sortOrder": 3
+          },
+          "textColor": {
+            "type": "color",
+            "value": "#000",
+            "label": "Field Text Color",
+            "sortOrder": 4
+          },
+          "customClass": {
+            "type": "textArea",
+            "value": "",
+            "label": "Custom class (container)",
+            "placeholder": "bg-slate-600 p-2 m-2",
+            "sortOrder": 5
+          }
+        }
+    },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "updatedOn": new Date(),
+  "_class": "com.serviceplus.formDesigner.formconfig.attrtypemaster.document.FieldJSONMaster"
+})
+//----------------------------------------------------------------------------------------------------------------
+// 0041372: SPPROD20 ||Form Builder: Minimum date and maximum date given for the date attribute is not working.
+// Date: 26-May-2026
+//----------------------------------------------------------------------------------------------------------------
+db.fieldJSONMaster.updateMany(
+    {
+        typeId: 8
+    },
+    {
+        $set:{
+        "json":{
+          "typeId": 8,
+          "label": "Date Field",
+          "icon": "CalendarIcon",
+                          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+
+          "htmlTag": {
+            "tag": "DateFieldComponent"
+          },
+          "component": true,
+          "parentId": null,
+          "displaySettings": {
+            "label": {
+              "type": "textField",
+              "value": "",
+              "label": "Field Label",
+              "placeholder": "Enter Field Label",
+              "sortOrder": 1
+            },
+            "configId": {
+              "type": "textField",
+              "value": "",
+              "label": "Id",
+              "sortOrder": 2
+            },
+            "labelPosition": {
+              "type": "select",
+              "value": "top",
+              "label": "Label Position",
+              "options": [
+                {
+                  "value": "top",
+                  "label": "Top"
+                },
+                {
+                  "value": "left",
+                  "label": "Left"
+                },
+                {
+                  "value": "right",
+                  "label": "Right"
+                },
+                {
+                  "value": "bottom",
+                  "label": "Bottom"
+                },
+                {
+                  "value": "center",
+                  "label": "Center"
+                }
+              ],
+              "sortOrder": 3
+            },
+            "placeholder": {
+              "type": "textField",
+              "value": "",
+              "label": "Placeholder",
+              "placeholder": "DD/MM/YYYY",
+              "sortOrder": 4
+            },
+            "description": {
+              "type": "textArea",
+              "value": "",
+              "label": "Description",
+              "placeholder": "Tell the user about this field",
+              "sortOrder": 5
+            },
+            "descriptionPosition": {
+              "type": "select",
+              "value": "bottom",
+              "label": "Description Position",
+              "options": [
+                {
+                  "value": "top",
+                  "label": "Top"
+                },
+                {
+                  "value": "bottom",
+                  "label": "Bottom"
+                }
+              ],
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "displaySettings",
+                    "key": "description",
+                    "operator": "truthy"
+                  }
+                ],
+                "clearOnHide": true
+              },
+              "sortOrder": 6
+            },
+            "tooltip": {
+              "type": "textField",
+              "value": "",
+              "label": "Tooltip",
+              "placeholder": "Enter tooltip content",
+              "sortOrder": 7
+            },
+            "hidden": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Hidden Field",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 8
+            },
+            "dateFormat": {
+              "type": "select",
+              "value": "DD/MM/YYYY",
+              "label": "Date Format",
+              "options": [
+                {
+                  "value": "DD/MM/YYYY",
+                  "label": "DD/MM/YYYY"
+                },
+                {
+                  "value": "MM/DD/YYYY",
+                  "label": "MM/DD/YYYY"
+                },
+                {
+                  "value": "YYYY-MM-DD",
+                  "label": "YYYY-MM-DD (ISO)"
+                },
+                {
+                  "value": "DD-MM-YYYY",
+                  "label": "DD-MM-YYYY"
+                },
+                {
+                  "value": "DD MMM YYYY",
+                  "label": "DD MMM YYYY"
+                }
+              ],
+              "sortOrder": 9
+            },
+            "dateType": {
+              "type": "select",
+              "value": "single",
+              "label": "Selection Type",
+              "options": [
+                {
+                  "value": "single",
+                  "label": "Single Date"
+                },
+                {
+                  "value": "range",
+                  "label": "Date Range"
+                }
+              ],
+              "sortOrder": 10
+            },
+            "enableTime": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Enable Time Picker",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 11
+            },
+            "timeFormat": {
+              "type": "select",
+              "value": "12",
+              "label": "Time Format",
+              "options": [
+                {
+                  "value": "12",
+                  "label": "12-hour (AM/PM)"
+                },
+                {
+                  "value": "24",
+                  "label": "24-hour"
+                }
+              ],
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "displaySettings",
+                    "key": "enableTime",
+                    "operator": "truthy"
+                  }
+                ],
+                "clearOnHide": true
+              },
+              "sortOrder": 12
+            },
+            "weekStartDay": {
+              "type": "select",
+              "value": "0",
+              "label": "Week Starts On",
+              "options": [
+                {
+                  "value": "0",
+                  "label": "Sunday"
+                },
+                {
+                  "value": "1",
+                  "label": "Monday"
+                },
+                {
+                  "value": "6",
+                  "label": "Saturday"
+                }
+              ],
+              "sortOrder": 13
+            },
+            "showClearButton": {
+              "type": "checkbox",
+              "value": true,
+              "label": "Show Clear Button",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 14
+            }
+          },
+          "validationSettings": {
+            "errorLabel": {
+              "type": "textField",
+              "value": "",
+              "label": "Default Error Message",
+              "placeholder": "Provide a default error message",
+              "sortOrder": 1
+            },
+            "required": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Required",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 2
+            },
+            "readOnly": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Read Only",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 3
+            },
+            "disabled": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Disabled",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 4
+            },
+            "enableForwardOffset": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Enable Forward Offset",
+              "description": "Restrict how far into the future the user can select, relative to a base date (or today).",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 5
+            },
+            "forwardOffsetDays": {
+              "type": "number",
+              "value": 0,
+              "label": "Forward Offset (days)",
+              "placeholder": "e.g. 10",
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableForwardOffset",
+                    "operator": "truthy"
+                  }
+                ],
+                "logic": "AND",
+                "clearOnHide": true
+              },
+              "sortOrder": 6
+            },
+            "forwardOffsetBaseDate": {
+              "type": "date",
+              "value": "",
+              "label": "Forward Base Date (optional)",
+              "placeholder": "YYYY-MM-DD — leave empty to use today",
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableForwardOffset",
+                    "operator": "truthy"
+                  }
+                ],
+                "logic": "AND",
+                "clearOnHide": true
+              },
+              "sortOrder": 7
+            },
+            "enableBackwardOffset": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Enable Backward Offset",
+              "description": "Restrict how far into the past the user can select, relative to a base date (or today).",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 8
+            },
+            "backwardOffsetDays": {
+              "type": "number",
+              "value": 0,
+              "label": "Backward Offset (days)",
+              "placeholder": "e.g. 10",
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableBackwardOffset",
+                    "operator": "truthy"
+                  }
+                ],
+                "logic": "AND",
+                "clearOnHide": true
+              },
+              "sortOrder": 9
+            },
+            "backwardOffsetBaseDate": {
+              "type": "date",
+              "value": "",
+              "label": "Backward Base Date (optional)",
+              "placeholder": "YYYY-MM-DD — leave empty to use today",
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableBackwardOffset",
+                    "operator": "truthy"
+                  }
+                ],
+                "logic": "AND",
+                "clearOnHide": true
+              },
+              "sortOrder": 10
+            },
+            "disableFutureDates": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Disable Future Dates",
+              "description": "Hides when Forward Offset is on.",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableForwardOffset",
+                    "operator": "falsy"
+                  },
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableBackwardOffset",
+                    "operator": "falsy"
+                  }
+                ],
+                "logic": "AND"
+              },
+              "sortOrder": 11
+            },
+            "maxDate": {
+              "type": "textField",
+              "value": "",
+              "label": "Max Date",
+              "placeholder": "YYYY-MM-DD or 'today'",
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "disableFutureDates",
+                    "operator": "falsy"
+                  },
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableForwardOffset",
+                    "operator": "falsy"
+                  },
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableBackwardOffset",
+                    "operator": "falsy"
+                  }
+                ],
+                "logic": "AND",
+                "clearOnHide": true
+              },
+              "sortOrder": 12
+            },
+            "disablePastDates": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Disable Past Dates",
+              "description": "Hides when Backward Offset is on.",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableBackwardOffset",
+                    "operator": "falsy"
+                  },
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableForwardOffset",
+                    "operator": "falsy"
+                  }
+                ],
+                "logic": "AND"
+              },
+              "sortOrder": 13
+            },
+            "minDate": {
+              "type": "textField",
+              "value": "",
+              "label": "Min Date",
+              "placeholder": "YYYY-MM-DD or 'today'",
+              "visibility": {
+                "when": [
+                  {
+                    "tab": "validationSettings",
+                    "key": "disablePastDates",
+                    "operator": "falsy"
+                  },
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableBackwardOffset",
+                    "operator": "falsy"
+                  },
+                  {
+                    "tab": "validationSettings",
+                    "key": "enableForwardOffset",
+                    "operator": "falsy"
+                  }
+                ],
+                "logic": "AND",
+                "clearOnHide": true
+              },
+              "sortOrder": 14
+            },
+            "disableWeekends": {
+              "type": "checkbox",
+              "value": false,
+              "label": "Disable Weekends",
+              "htmlValue": true,
+              "htmlFalseValue": false,
+              "sortOrder": 15
+            },
+            "disabledDates": {
+              "type": "textArea",
+              "value": "",
+              "label": "Disabled Specific Dates",
+              "placeholder": "Comma separated: 2024-01-01, 2024-12-25",
+              "sortOrder": 16
+            }
+          },
+          "styleSettings": {
+            "width": {
+              "type": "number",
+              "value": 100,
+              "label": "Container Width",
+              "colspan": 3,
+              "sortOrder": 1
+            },
+            "widthUnit": {
+              "type": "select",
+              "value": "%",
+              "label": "Unit",
+              "options": [
+                {
+                  "value": "px",
+                  "label": "Pixels"
+                },
+                {
+                  "value": "%",
+                  "label": "Percentage"
+                }
+              ],
+              "colspan": 1,
+              "sortOrder": 2
+            },
+            "labelColor": {
+              "type": "color",
+              "value": "#000",
+              "label": "Label Color",
+              "sortOrder": 5
+            },
+            "backgroundColor": {
+              "type": "color",
+              "value": "#fff",
+              "label": "Field Background Color",
+              "sortOrder": 6
+            },
+            "textColor": {
+              "type": "color",
+              "value": "#000",
+              "label": "Field Text Color",
+              "sortOrder": 7
+            },
+            "descriptionColor": {
+              "type": "color",
+              "value": "#000",
+              "label": "Description Color",
+              "sortOrder": 8
+            },
+            "containerColor": {
+              "type": "color",
+              "value": "#fff",
+              "label": "Container Background Color",
+              "colspan": 4,
+              "sortOrder": 9
+            },
+            "customClass": {
+              "type": "textArea",
+              "value": "",
+              "label": "Custom class (container)",
+              "placeholder": "bg-slate-600 p-2 m-2",
+              "sortOrder": 10
+            },
+            "customClassEl": {
+              "type": "textArea",
+              "value": "",
+              "label": "Custom class (field)",
+              "placeholder": "text-red-200 border border-yellow-500",
+              "sortOrder": 11
+            },
+            "labelRatio": {
+              "type": "number",
+              "value": 30,
+              "label": "Label Width",
+              "colspan": 3,
+              "visibility": {
+                "logic": "OR",
+                "when": [
+                  {
+                    "tab": "displaySettings",
+                    "key": "labelPosition",
+                    "operator": "equals",
+                    "value": "left"
+                  },
+                  {
+                    "tab": "displaySettings",
+                    "key": "labelPosition",
+                    "operator": "equals",
+                    "value": "right"
+                  }
+                ]
+              },
+              "sortOrder": 3
+            },
+            "labelRatioUnit": {
+              "type": "select",
+              "value": "%",
+              "label": "Unit",
+              "colspan": 1,
+              "options": [
+                {
+                  "value": "%",
+                  "label": "Percentage"
+                },
+                {
+                  "value": "px",
+                  "label": "Pixels"
+                }
+              ],
+              "visibility": {
+                "logic": "OR",
+                "when": [
+                  {
+                    "tab": "displaySettings",
+                    "key": "labelPosition",
+                    "operator": "equals",
+                    "value": "left"
+                  },
+                  {
+                    "tab": "displaySettings",
+                    "key": "labelPosition",
+                    "operator": "equals",
+                    "value": "right"
+                  }
+                ]
+              },
+              "sortOrder": 4
+            }
+          },
+          "apiSettings": {
+            "actionCreators": []
+          }
+        }
+        }
+    }
+)
+
+//SP 2.0 || Missing properties for the File Upload/Camera attribute.
+db.fieldJSONMaster.updateMany(
+  { typeId: 45 },
+  {
+    $set: {
+      "json.validationSettings.accept": {
+        type: "select",
+        multi: true,
+        value: "*",
+        label: "Allowed File Types",
+        enableQuery: "getFileTypes",
+        enableCondition: "fileTypes",
+        sortOrder: 3
+      }
+    }
+  }
+);
+
+// Date: 05-Aug-2026
+//Update Fields according to the SPGD Changes
+db.fieldTypeMaster.updateMany(
+  {
+    "groupsJsonData.gov/dir.elements.typeId": { $ne: 90 }
+  },
+  {
+    $push: {
+      "groupsJsonData.gov/dir.elements": {
+        typeId: 90,
+        icon: "TargetIcon",
+        label: "Custom SPGD",
+        customClass: "bg-white px-4 py-2 text-md border border-slate-600",
+        sortOrder: 8
+      }
+    }
+  }
+);
+
+const docs = db.fieldJSONMaster.aggregate([
+  {
+    $group: {
+      _id: "$tenantId"
+    }
+  },
+	{
+	  $project: {
+		_id: 0,
+		tenantId: "$_id",
+		typeId: { $literal: 90 },
+		createdBy: { $literal: "adminUser" },
+		updatedOn: "$$NOW",
+		json: {
+		  $literal: 
+		  {
+  "typeId": 90,
+  "name": "Custom SPGD",
+  "htmlTag": {
+    "tag": "CustomSPGD"
+  },
+  "component": true,
+  "parentId": null,
+  "displaySettings": {
+    "label": {
+      "type": "textField",
+      "value": "",
+      "label": "Field Label",
+      "placeholder": "Enter Field Label",
+      "tooltip": "Label of the field",
+      "sortOrder": 1
+    },
+    "configId": {
+      "type": "textField",
+      "value": "",
+      "label": "Id",
+      "sortOrder": 2
+    },
+    "labelPosition": {
+      "type": "select",
+      "value": "top",
+      "label": "Label Position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        }
+      ],
+      "sortOrder": 3
+    },
+    "placeholder": {
+      "type": "textField",
+      "value": "",
+      "label": "Placeholder",
+      "placeholder": "Enter placeholder text",
+      "sortOrder": 4
+    },
+    "description": {
+      "type": "textArea",
+      "value": "",
+      "label": "Description of Element",
+      "placeholder": "Tell the user about the element",
+      "sortOrder": 5
+    },
+    "descriptionPosition": {
+      "type": "select",
+      "sortOrder": 6,
+      "value": "bottom",
+      "label": "Description Position",
+      "options": [
+        {
+          "value": "top",
+          "label": "Top"
+        },
+        {
+          "value": "bottom",
+          "label": "Bottom"
+        }
+      ],
+      "visibility": {
+        "when": [
+          {
+            "tab": "displaySettings",
+            "key": "description",
+            "operator": "truthy"
+          }
+        ],
+        "clearOnHide": true
+      }
+    }
+  },
+  "dataSettings": {
+    "dataCapture": {
+      "type": "lgd",
+      "render": "customSPGD",
+      "sortOrder": 1
+    },
+    "standalone": {
+      "type": "select",
+      "value": "true",
+      "options": [
+        {
+          "label": "Yes",
+          "value": "false"
+        },
+        {
+          "label": "No",
+          "value": "true"
+        }
+      ],
+      "label": "Is it dependent",
+      "tooltip": "Is it dependent on a parent?",
+      "sortOrder": 2
+    },
+    "dependentParentLGDField": {
+      "type": "select",
+      "value": "",
+      "label": "Select the parent",
+      "enableCondition": "spgdParentMapping",
+      "visibility": {
+        "when": [
+          {
+            "tab": "dataSettings",
+            "key": "standalone",
+            "operator": "notEquals",
+            "value": "true"
+          }
+        ]
+      },
+      "sortOrder": 3
+    },
+    "customMapping": {
+      "type": "hidden",
+      "value": null,
+      "sortOrder": 4
+    }
+  },
+  "styleSettings": {
+            "width": {
+                "type": "number",
+                "value": 100,
+                "label": "Container Width",
+                "colspan": 3,
+                "sortOrder": 1
+            },
+            "widthUnit": {
+                "type": "select",
+                "value": "%",
+                "label": "Unit",
+                "options": [
+                    {
+                        "value": "px",
+                        "label": "Pixels"
+                    },
+                    {
+                        "value": "%",
+                        "label": "Percentage"
+                    }
+                ],
+                "colspan": 1,
+                "sortOrder": 2
+            },
+            "labelColor": {
+                "type": "color",
+                "value": "#000",
+                "label": "Label Color",
+                "sortOrder": 5
+            },
+            "backgroundColor": {
+                "type": "color",
+                "value": "#fff",
+                "label": "Field Background Color",
+                "sortOrder": 6
+            },
+            "textColor": {
+                "type": "color",
+                "value": "#000",
+                "label": "Field Text Color",
+                "sortOrder": 7
+            },
+            "descriptionColor": {
+                "type": "color",
+                "value": "#000",
+                "label": "Description Color",
+                "sortOrder": 8
+            },
+            "containerColor": {
+                "type": "color",
+                "value": "#fff",
+                "label": "Container Background Color",
+                "colspan": 4,
+                "sortOrder": 9
+            },
+            "customClass": {
+                "type": "textArea",
+                "value": "",
+                "label": "Custom class (container)",
+                "placeholder": "bg-slate-600 p-2 m-2",
+                "sortOrder": 10
+            },
+            "customClassEl": {
+                "type": "textArea",
+                "value": "",
+                "label": "Custom class (field)",
+                "placeholder": "text-red-200 border border-yellow-500",
+                "sortOrder": 11
+            },
+            "labelRatio": {
+                "type": "number",
+                "value": 30,
+                "label": "Label Width",
+                "colspan": 3,
+                "visibility": {
+                    "logic": "OR",
+                    "when": [
+                        {
+                            "tab": "displaySettings",
+                            "key": "labelPosition",
+                            "operator": "equals",
+                            "value": "left"
+                        },
+                        {
+                            "tab": "displaySettings",
+                            "key": "labelPosition",
+                            "operator": "equals",
+                            "value": "right"
+                        }
+                    ]
+                },
+                "sortOrder": 3
+            },
+            "labelRatioUnit": {
+                "type": "select",
+                "value": "%",
+                "label": "Unit",
+                "colspan": 1,
+                "options": [
+                    {
+                        "value": "%",
+                        "label": "Percentage"
+                    },
+                    {
+                        "value": "px",
+                        "label": "Pixels"
+                    }
+                ],
+                "visibility": {
+                    "logic": "OR",
+                    "when": [
+                        {
+                            "tab": "displaySettings",
+                            "key": "labelPosition",
+                            "operator": "equals",
+                            "value": "left"
+                        },
+                        {
+                            "tab": "displaySettings",
+                            "key": "labelPosition",
+                            "operator": "equals",
+                            "value": "right"
+                        }
+                    ]
+                },
+                "sortOrder": 4
+            }
+        }
+}
+		}
+	  }
+	}
+]).toArray();
+
+db.fieldJSONMaster.insertMany(docs, { ordered: false });
+
+
+db.fieldJSONMaster.updateMany(
+  {
+    typeId: { $in: [17, 18, 19, 20, 21, 22, 23] }
+  },
+  [
+    {
+      $set: {
+        "json.constUid": {
+          $switch: {
+            branches: [
+              { case: { $eq: ["$typeId", 17] }, then: "state" },
+              { case: { $eq: ["$typeId", 18] }, then: "district" },
+              { case: { $eq: ["$typeId", 19] }, then: "subDist" },
+              { case: { $eq: ["$typeId", 20] }, then: "village" },
+              { case: { $eq: ["$typeId", 21] }, then: "block" },
+              { case: { $eq: ["$typeId", 22] }, then: "localBody" },
+              { case: { $eq: ["$typeId", 23] }, then: "lineDept" }
+            ]
+          }
+        }
+      }
+    }
+  ]
+);
+
+db.fieldJSONMaster.updateMany(
+  {
+    typeId: 22
+  },
+  {
+    $set: {
+      "json.dataSettings": {
+        dataCapture: {
+          type: "lgd",
+          render: "local"
+        }
+      }
+    }
+  }
+);
+
+db.fieldJSONMaster.updateMany(
+  {
+    typeId: 23
+  },
+  {
+    $set: {
+      "json.dataSettings": {
+        dataCapture: {
+          type: "lgd",
+          render: "line"
+        }
+      }
+    }
+  }
+);
+
+db.fieldJSONMaster.updateMany(
+	{
+		typeId: 44
+	},
+	{
+		$set: {
+			"json.displaySettings.labelPosition.label": "Label Position"
+		}
+	}
+);

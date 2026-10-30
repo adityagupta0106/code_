@@ -1,0 +1,10 @@
+db.autosave.updateMany(
+   { userId: { $type: "int" } },
+   [
+      {
+         $set: {
+            userId: { $toLong: "$userId" }
+         }
+      }
+   ]
+)

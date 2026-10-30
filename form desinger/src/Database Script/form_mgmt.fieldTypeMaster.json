@@ -1,0 +1,215 @@
+db.fieldTypeMaster.insertMany([{
+  "groupsJsonData": {
+    "basic": {
+      "properties": {
+        "layout": "flex-row gap-4 items-center"
+      },
+      "elements": [
+        {
+          "typeId": 1,
+          "icon": "TextIcon",
+          "label": "text field",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 1
+        },
+        {
+          "typeId": 2,
+          "icon": "KeyboardIcon",
+          "label": "number field",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 2
+        },
+        {
+          "typeId": 3,
+          "icon": "EnvelopeClosedIcon",
+          "label": "email",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 3
+        },
+        {
+          "typeId": 4,
+          "icon": "TextAlignJustifyIcon",
+          "label": "text area",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 4
+        },
+        {
+          "typeId": 6,
+          "icon": "RadiobuttonIcon",
+          "label": "radio group",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 5
+        },
+        {
+          "typeId": 40,
+          "icon": "HeightIcon",
+          "label": "Select",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 6
+        },
+        {
+          "typeId": 7,
+          "icon": "CheckboxIcon",
+          "label": "checkbox group",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 7
+        },
+        {
+          "typeId": 8,
+          "icon": "CalendarIcon",
+          "label": "date field",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 8
+        },
+        {
+          "typeId": 41,
+          "icon": "LayoutIcon",
+          "label": "section",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 9
+        },
+        {
+          "typeId": 43,
+          "icon": "BorderStyleIcon",
+          "label": "page break",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "configurable": false,
+          "onlyTopLevelDrop": true,
+          "sortOrder": 10
+        }
+      ]
+    },
+    "gov/dir": {
+      "properties": {
+        "layout": "flex-row gap-4 items-center"
+      },
+      "elements": [
+        {
+          "typeId": 17,
+          "icon": "TbLetterS",
+          "label": "state",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 1
+        },
+        {
+          "typeId": 18,
+          "icon": "TbLetterD",
+          "label": "district",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 2
+        },
+        {
+          "typeId": 19,
+          "icon": "PiSubtract",
+          "label": "sub district",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 3
+        },
+        {
+          "typeId": 20,
+          "icon": "GiVillage",
+          "label": "village",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 4
+        },
+        {
+          "typeId": 21,
+          "icon": "TbLetterB",
+          "label": "block",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 5
+        },
+        {
+          "typeId": 22,
+          "icon": "RiGovernmentLine",
+          "label": "local body",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 6
+        },
+        {
+          "typeId": 23,
+          "icon": "MdOutlineAccountBalance",
+          "label": "line department",
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 7
+        }
+      ]
+    },
+    "advanced": {
+      "properties": {
+        "layout": "flex-row gap-4 items-center"
+      },
+      "elements": [
+        {
+          "typeId": 45,
+          "icon": "CameraIcon",
+          "label": "file/camera",
+          "customClass": "bg-white px-8 py-2 text-md border border-slate-600",
+          "sortOrder": 2
+        },
+        {
+          "typeId": 46,
+          "icon": "IdCardIcon",
+          "label": "rich text editor",
+          "customClass": "bg-white px-8 py-2 text-md border border-slate-600",
+          "sortOrder": 3
+        },
+        {
+          "typeId": 42,
+          "icon": "TfiHtml5",
+          "label": "HTML",
+          "customClass": "bg-white px-8 py-2 text-md border border-slate-600",
+          "sortOrder": 4
+        },
+        {
+          "typeId": 44,
+          "icon": "SectionIcon",
+          "label": "dynamic row",
+          "customClass": "bg-white px-8 py-2 text-md border border-slate-600",
+          "sortOrder": 6
+        }
+      ]
+    },
+    "workflow": {
+      "properties": {
+        "cols": 2
+      },
+      "elements": [
+        {
+          "typeId": 100,
+          "label": "Action",
+          "instantiable": false,
+          "customClass": "bg-white px-4 py-2 text-md border border-slate-600",
+          "icon": "PaperPlaneIcon",
+          "sortOrder": 1
+        },
+        {
+          "typeId": 101,
+          "label": "Task",
+          "icon": "Pencil2Icon",
+          "instantiable": false,
+          "customClass": "bg-white flex flex-col px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 2
+        },
+        {
+          "typeId": 103,
+          "label": "Users",
+          "icon": "PersonIcon",
+          "customClass": "bg-white flex flex-col px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 3
+        },
+        {
+          "typeId": 104,
+          "label": "Remarks",
+          "icon": "ChatBubbleIcon",
+          "customClass": "bg-white flex flex-col px-4 py-2 text-md border border-slate-600",
+          "sortOrder": 4
+        }
+      ]
+    }
+  },
+  "tenantId": <tenantId>,
+  "createdBy": "adminUser",
+  "createdOn": new Date(),
+  "updatedOn": new Date()
+}])

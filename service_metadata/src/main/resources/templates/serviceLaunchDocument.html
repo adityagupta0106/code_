@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Definition Document — {{Service Name}}</title>
+
+<style>
+  :root{
+    --ink:#1C2B4A;
+    --ink-soft:#4B5872;
+    --ink-faint:#8B94A7;
+    --paper:#F4F6FA;
+    --card:#FFFFFF;
+    --teal:#0F6E5B;
+    --teal-tint:#E4F2EE;
+    --amber:#B5791F;
+    --amber-tint:#FBF1DE;
+    --navy-deep:#132038;
+    --navy-deep-soft:#1D2E4C;
+    --line:#E1E5EE;
+    --line-soft:#EDF0F5;
+    --danger:#8C3A3A;
+    --radius:10px;
+    --sidebar-w:296px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:15.5px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  .layout{display:flex; min-height:100vh;}
+
+  /* ---------------- Sidebar ---------------- */
+  .sidebar{
+    width:var(--sidebar-w);
+    flex:0 0 var(--sidebar-w);
+    background:linear-gradient(190deg, var(--navy-deep) 0%, var(--navy-deep-soft) 100%);
+    color:#D8DEEA;
+    position:sticky;
+    top:0;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    padding:34px 26px 26px;
+  }
+  .badge{
+    width:52px; height:52px; border-radius:50%;
+    background:radial-gradient(circle at 30% 30%, #2A6E5A, #0F4A3D);
+    border:1px solid rgba(255,255,255,0.14);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:600; font-size:12.5px; letter-spacing:0.5px;
+    color:#EAF4F0;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  }
+  .doc-kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px; letter-spacing:1.6px; text-transform:uppercase;
+    color:#8FA3C4; margin:18px 0 4px;
+  }
+  .doc-title{
+    font-family:'Source Serif 4',serif;
+    font-size:20px; font-weight:600; line-height:1.32;
+    color:#F3F5F9; margin:0 0 2px;
+  }
+  .doc-subtitle{
+    font-size:12.5px; color:#9FB0CC; margin-bottom:26px;
+    padding-bottom:22px; border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  nav.toc{flex:1;}
+  nav.toc .toc-label{
+    font-family:'IBM Plex Mono',monospace; font-size:10px;
+    letter-spacing:1.6px; text-transform:uppercase; color:#7186A8;
+    margin-bottom:12px;
+  }
+  nav.toc a{
+    display:flex; align-items:baseline; gap:10px;
+    text-decoration:none; color:#B9C4D9;
+    padding:9px 10px 9px 12px;
+    margin:0 -10px 2px;
+    border-left:2px solid transparent;
+    border-radius:0 6px 6px 0;
+    font-size:13.3px;
+    transition:background .18s ease, color .18s ease, border-color .18s ease;
+  }
+  nav.toc a .num{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:#5E7295;
+    flex:0 0 auto;
+  }
+  nav.toc a:hover{ background:rgba(255,255,255,0.05); color:#EAEFF7; }
+  nav.toc a.active{
+    background:rgba(255,255,255,0.07);
+    border-left-color:#3FA88C;
+    color:#FFFFFF;
+    font-weight:500;
+  }
+  nav.toc a.active .num{ color:#3FA88C; }
+
+  .sidebar-foot{
+    padding-top:18px; margin-top:18px;
+    border-top:1px solid rgba(255,255,255,0.1);
+    font-size:11.5px; color:#7B8CAC; line-height:1.6;
+  }
+  .sidebar-foot strong{ color:#C6D0E4; display:block; font-weight:500; }
+
+  /* ---------------- Main content ---------------- */
+  main{ flex:1; min-width:0; }
+  .sheet{
+    max-width:840px;
+    margin:0 auto;
+    padding:64px 56px 100px;
+  }
+
+  /* Cover */
+  .cover{ padding-bottom:10px; }
+  .cover .eyebrow{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px;
+    letter-spacing:2px; text-transform:uppercase; color:var(--teal);
+    margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .cover .eyebrow::before{
+    content:""; width:26px; height:1px; background:var(--teal);
+  }
+  .cover h1{
+    font-family:'Source Serif 4',serif; font-weight:700;
+    font-size:42px; line-height:1.12; margin:0 0 14px; color:var(--ink);
+    max-width:640px;
+  }
+  .cover .scheme{
+    font-family:'Source Serif 4',serif; font-size:21px; color:var(--ink-soft);
+    margin:0 0 22px; font-weight:500;
+  }
+  .cover .office{
+    font-size:14.5px; color:var(--ink-soft); max-width:600px;
+    padding:16px 20px; background:var(--card); border:1px solid var(--line);
+    border-left:3px solid var(--amber); border-radius:6px;
+    margin-bottom:40px;
+  }
+
+  .info-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:20px;
+    margin-bottom:8px;
+  }
+  .info-card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:22px 24px;
+  }
+  .info-card h3{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px;
+    letter-spacing:1.4px; text-transform:uppercase; color:var(--teal);
+    margin:0 0 16px; display:flex; align-items:center; gap:8px;
+  }
+  .info-card h3::before{
+    content:""; width:7px; height:7px; border-radius:50%; background:var(--teal);
+  }
+  .info-row{
+    display:grid; grid-template-columns:120px 1fr; gap:10px;
+    padding:7px 0; border-bottom:1px solid var(--line-soft);
+    font-size:13.3px;
+  }
+  .info-row:last-child{ border-bottom:none; }
+  .info-row dt{ color:var(--ink-faint); font-weight:500; }
+  .info-row dd{ margin:0; color:var(--ink); }
+
+  /* Section framing */
+  section.doc-section{
+    position:relative;
+    margin-top:86px;
+    scroll-margin-top:40px;
+  }
+  section.doc-section .ghost-num{
+    position:absolute; top:-40px; right:-6px;
+    font-family:'Source Serif 4',serif; font-weight:700;
+    font-size:118px; color:var(--ink); opacity:0.045;
+    line-height:1; z-index:0; user-select:none;
+    pointer-events:none;
+  }
+  .section-head{
+    display:flex; align-items:flex-start; gap:16px;
+    margin-bottom:6px; position:relative; z-index:1;
+  }
+  .tab{
+    flex:0 0 auto;
+    font-family:'IBM Plex Mono',monospace; font-weight:600; font-size:13px;
+    color:#fff; background:var(--teal);
+    padding:6px 10px; border-radius:5px;
+    letter-spacing:0.4px;
+  }
+  section.doc-section:nth-of-type(3) .tab{ background:var(--amber); }
+  section.doc-section:nth-of-type(4) .tab{ background:var(--ink); }
+  section.doc-section:nth-of-type(5) .tab{ background:var(--teal); }
+    #launch-approval .tab{ background:var(--amber); }
+
+  .section-head h2{
+    font-family:'Source Serif 4',serif; font-size:26px; font-weight:600;
+    margin:0; color:var(--ink); padding-top:2px;
+  }
+  .section-intro{
+    color:var(--ink-soft); max-width:640px; margin:18px 0 26px;
+    font-size:14.8px; position:relative; z-index:1;
+  }
+
+  .config-list{ list-style:none; margin:0 0 8px; padding:0; position:relative; z-index:1; }
+  .config-list li{
+    display:flex; gap:12px; align-items:flex-start;
+    padding:11px 0; border-bottom:1px solid var(--line-soft);
+    font-size:14.3px; color:var(--ink);
+  }
+  .config-list li:last-child{ border-bottom:none; }
+  .check{
+    flex:0 0 auto; width:18px; height:18px; margin-top:2px;
+    border-radius:50%; background:var(--teal-tint);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .check svg{ width:10px; height:10px; }
+
+  .subblock{ margin-top:34px; position:relative; z-index:1; }
+  .subblock h4{
+    font-family:'IBM Plex Sans',sans-serif; font-size:14.5px; font-weight:600;
+    color:var(--ink); margin:0 0 4px;
+    display:flex; align-items:center; gap:9px;
+  }
+  .subblock h4::before{
+    content:""; width:16px; height:2px; background:var(--amber); display:inline-block;
+  }
+  .subblock .config-list{ margin-top:10px; }
+
+  /* Process flow */
+  .flow-wrap{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:28px 20px 20px;
+    position:relative; z-index:1; margin-bottom:18px;
+  }
+  .flow-wrap svg{ width:100%; height:auto; display:block; }
+  .legend{
+    display:flex; gap:22px; flex-wrap:wrap;
+    margin-top:18px; padding-top:16px; border-top:1px solid var(--line-soft);
+    font-size:12px; color:var(--ink-soft);
+  }
+  .legend span{ display:inline-flex; align-items:center; gap:7px; }
+  .legend .sw{ width:13px; height:13px; border-radius:3px; display:inline-block; }
+  .legend .sw.task{ background:var(--teal-tint); border:1.5px solid var(--teal); }
+  .legend .sw.gate{ background:var(--amber-tint); border:1.5px solid var(--amber); transform:rotate(45deg); border-radius:2px; }
+  .legend .sw.term{ background:var(--ink); border-radius:50%; }
+  .caption{
+    text-align:center; font-size:12px; color:var(--ink-faint);
+    font-style:italic; margin-top:16px;
+  }
+
+  /* Launch approval / disclaimer */
+  .launch-card{
+    background:var(--card); border:1px solid var(--line);
+    border-radius:var(--radius); padding:30px 32px;
+    position:relative; z-index:1;
+  }
+  .launch-card.is-checked{ border-color:#B9DED2; box-shadow:0 0 0 3px rgba(15,110,89,0.08); }
+  .disclaimer-row{
+    display:flex; align-items:flex-start; gap:14px;
+    padding-bottom:24px; margin-bottom:24px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .disclaimer-row input[type="checkbox"]{
+    appearance:none; -webkit-appearance:none;
+    width:21px; height:21px; flex:0 0 auto;
+    border:1.6px solid #C4CBDA; border-radius:5px;
+    margin:1px 0 0; cursor:pointer;
+    position:relative; background:#fff;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  .disclaimer-row input[type="checkbox"]:checked{
+    background:var(--teal); border-color:var(--teal);
+  }
+  .disclaimer-row input[type="checkbox"]:checked::after{
+    content:""; position:absolute; left:6px; top:2px;
+    width:6px; height:11px;
+    border:solid #fff; border-width:0 2px 2px 0;
+    transform:rotate(40deg);
+  }
+  .disclaimer-row input[type="checkbox"]:focus-visible{
+    outline:2px solid var(--teal); outline-offset:2px;
+  }
+  .disclaimer-row label{
+    font-size:14.6px; color:var(--ink); line-height:1.6; cursor:pointer;
+  }
+  .disclaimer-row label .fine{
+    display:block; margin-top:5px; font-size:12.3px; color:var(--ink-faint);
+  }
+  .launch-actions{
+    display:flex; align-items:center; justify-content:space-between; gap:18px; flex-wrap:wrap;
+  }
+  .launch-status{
+    display:flex; align-items:center; gap:9px;
+    font-size:12.8px; color:var(--ink-faint);
+  }
+  .launch-status .dot{
+    width:8px; height:8px; border-radius:50%; background:#C7CEDC;
+    transition:background .15s ease;
+  }
+  .launch-card.is-checked .launch-status .dot{ background:var(--teal); }
+  .launch-card.is-checked .launch-status{ color:var(--teal); }
+  .btn-launch{
+    appearance:none; border:none; cursor:pointer;
+    background:#C7CEDC; color:#fff;
+    font-family:'IBM Plex Sans',sans-serif; font-weight:600; font-size:14px;
+    padding:13px 26px; border-radius:8px;
+    letter-spacing:0.2px;
+    transition:background .15s ease, transform .1s ease, box-shadow .15s ease;
+    pointer-events:none;
+  }
+  .launch-card.is-checked .btn-launch{
+    background:var(--teal); pointer-events:auto;
+    box-shadow:0 6px 16px rgba(15,110,89,0.28);
+  }
+  .launch-card.is-checked .btn-launch:hover{ background:#0C5B4C; }
+  .launch-card.is-checked .btn-launch:active{ transform:translateY(1px); }
+  .btn-launch svg{ vertical-align:-2px; margin-left:7px; }
+  .launch-confirm{
+    margin-top:18px; padding-top:18px; border-top:1px solid var(--line-soft);
+    font-size:12.8px; color:var(--teal); display:none; align-items:center; gap:8px;
+  }
+  .launch-confirm.show{ display:flex; }
+
+  footer.sheet-foot{
+    margin-top:100px; padding-top:24px; border-top:1px solid var(--line);
+    font-size:12px; color:var(--ink-faint);
+    display:flex; justify-content:space-between; position:relative; z-index:1;
+  }
+
+  @media (max-width:880px){
+    .sidebar{ display:none; }
+    .sheet{ padding:40px 22px 70px; }
+    .info-grid{ grid-template-columns:1fr; }
+    .cover h1{ font-size:32px; }
+    section.doc-section .ghost-num{ display:none; }
+  }
+
+  @media print{
+    .sidebar{ display:none; }
+    .sheet{ padding:0; max-width:100%; }
+    section.doc-section{ page-break-inside:avoid; margin-top:50px; }
+    body{ background:#fff; }
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+    font-size:15.5px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .doc-kicker{
+    font-family:"Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  .doc-title{
+    font-family:Georgia, "Times New Roman", serif;
+  }
+
+  .badge{
+    font-family:"Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  nav.toc .toc-label{
+    font-family:"Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  nav.toc a .num{
+    font-family:"Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  .cover .eyebrow{
+    font-family:"Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  .cover h1{
+    font-family:Georgia, "Times New Roman", serif;
+  }
+
+  .cover .scheme{
+    font-family:Georgia, "Times New Roman", serif;
+  }
+
+  .info-card h3{
+    font-family:"Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  .tab{
+    font-family:"Cascadia Mono", Consolas, "Courier New", monospace;
+  }
+
+  .section-head h2{
+    font-family:Georgia, "Times New Roman", serif;
+  }
+
+  .subblock h4{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+  }
+
+  .btn-launch{
+    font-family:"Segoe UI", Arial, Helvetica, sans-serif;
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="badge">{{Service Name Abbreviation}}</div>
+    <div class="doc-kicker">Service Launch Dossier</div>
+    <div class="doc-title">Service Definition Document</div>
+    <div class="doc-subtitle">{{Service Name}}</div>
+
+    <nav class="toc" aria-label="Document sections">
+      <div class="toc-label">Contents</div>
+      <a href="#cover" data-target="cover"><span class="num">00</span> Cover &amp; Approvals</a>
+      <a href="#service-definition" data-target="service-definition"><span class="num">01</span> Service Definition</a>
+	  <a href="#launch-approval" data-target="launch-approval"><span class="num">05</span> Launch Approval</a>
+    </nav>
+
+    <div class="sidebar-foot">
+      <strong>Defined by</strong>
+      {{Name of Service Definer}} · {{Designation of Service Definer}}
+    </div>
+  </aside>
+
+  <main>
+    <div class="sheet">
+
+      <section id="cover" class="cover">
+        <div class="eyebrow">Service Definition Document</div>
+        <h1>{{Service Name}}</h1>
+        <p class="scheme">{{Type of Service}} · National Project</p>
+        <p class="office">{{Service Definer Department Name}}</p>
+
+        <div class="info-grid">
+          <div class="info-card">
+            <h3>Defined By</h3>
+            <dl>
+              <div class="info-row"><dt>Name</dt><dd>{{Service Definer Name}}</dd></div>
+              <div class="info-row"><dt>Designation</dt><dd>{{Designation of Service Definer}}</dd></div>
+              <div class="info-row"><dt>Department</dt><dd>{{Service Definer Department Name}}</dd></div>
+              <div class="info-row"><dt>Mobile</dt><dd>{{Contact Number of Service Definer}}</dd></div>
+              <div class="info-row"><dt>Email</dt><dd>{{Email address of Service Definer}}</dd></div>
+            </dl>
+          </div>
+          <div class="info-card">
+            <h3>Approved By</h3>
+            <dl>
+              <div class="info-row"><dt>Admin Name</dt><dd>{{Department Admin Name}}</dd></div>
+              <div class="info-row"><dt>Designation</dt><dd>{{Designation of Department Admin}}</dd></div>
+              <div class="info-row"><dt>Department</dt><dd>{{Office name of Department Admin}}</dd></div>
+              <div class="info-row"><dt>Contact No</dt><dd>{{Contact number of Department Admin}}</dd></div>
+              <div class="info-row"><dt>Email</dt><dd>{{email address of Department Admin}}</dd></div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. Service Definition -->
+      <section id="service-definition" class="doc-section">
+        <span class="ghost-num">01</span>
+        <div class="section-head">
+          <span class="tab">01</span>
+          <h2>Service Definition</h2>
+        </div>
+        <p class="section-intro">The Service Definition screen captures the core identity and configuration of the service. The following configuration has been completed:</p>
+        <ul class="config-list">
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Service Name, Abbreviation and Keywords have been defined, along with a Description of the service.</li>
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Service Category is {{Service Category Name}} and Type of Service is {{Type of Service}}.</li>
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Applicant(s) are not required to register to avail this service.</li> <!-- If registration is not required. -->
+		  <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Applicant(s) are required to register to avail this service.</li> <!-- If registration is required. -->
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> This service is not covered under the 'Service Delivery Act'.</li> <!-- If SLA is not defined. -->
+		  <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> This service is covered under the 'Service Delivery Act'. The SLA is Same Day</li> <!-- If SLA is defined as same day. -->
+		  <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> This service is covered under the 'Service Delivery Act'. The SLA is {{Number of Days}} days.</li> <!-- If SLA is defined as custom day. -->
+		  <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> This service is covered under the 'Service Delivery Act'. The SLA is {{Number of weeks}} week.</li> <!-- If SLA is defined as custom week. -->
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> The following Sustainable Development Goal(s) have been tagged against this service.{{Comma separated SDG goals}}</li>
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> FIFO (First in First out) has not been enabled for this service.</li>  <!-- If FIFO has not been enabled. -->
+		  <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> FIFO (First in First out) has been enabled for this service.</li>  <!-- If FIFO has been enabled. -->
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> e-KYC has not been enabled as a requirement for this service.</li> <!-- If eKYC has not been enabled. -->
+		  <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> e-KYC has been enabled as a requirement for this service.</li> <!-- If eKYC has been enabled. -->
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> Feedback from the user has not been enabled for this service.</li>
+          <li><span class="check"><svg viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span> One Frequently Asked Question has been configured — "{{question}}" — answered as "{{answer}}"</li>
+        </ul>
+		
+		<ul class="config-list">
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				Service Name, Abbreviation and Keywords have been defined,
+				along with a Description of the service.
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				Service Category is {{Service Category Name}}
+				and Type of Service is {{Type of Service}}.
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				{{Registration Configuration}}
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				{{Service Delivery Act Configuration}}
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				The following Sustainable Development Goal(s) have been
+				tagged against this service: {{SDG Goals}}
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				{{FIFO Configuration}}
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				{{eKYC Configuration}}
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				{{Feedback Configuration}}
+			</li>
+		
+			<li>
+				<span class="check">
+					<svg viewBox="0 0 16 16" fill="none">
+						<path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round"
+							stroke-linejoin="round" />
+					</svg>
+				</span>
+				{{FAQ Configuration}}
+			</li>
+		
+		</ul>
+      </section>
+	  
+	 <!-- 5. Launch Approval -->
+      <section id="launch-approval" class="doc-section">
+        <span class="ghost-num">05</span>
+        <div class="section-head">
+          <span class="tab">05</span>
+          <h2>Launch Approval</h2>
+        </div>
+        <p class="section-intro">Before this service is moved to the production environment, the approving authority must confirm that every section of this Service Definition Document has been reviewed.</p>
+
+        <div class="launch-card" id="launchCard">
+          <div class="disclaimer-row">
+            <input type="checkbox" id="disclaimerCheck">
+            <label for="disclaimerCheck">
+              I have read all the definitions carefully and the service can be launched to the production environment.
+              <span class="fine">This confirms review of the Service Definition, Process Flow, Service Initiation, and Service Delivery Unit configuration as outlined in the above sections of this document.</span>
+            </label>
+          </div>
+
+          <div class="launch-actions">
+            <div class="launch-status">
+              <span class="dot"></span>
+              <span id="launchStatusText">Awaiting confirmation</span>
+            </div>
+            <button class="btn-launch" id="launchBtn" type="button" disabled>
+              Launch to Production
+              <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+
+          <div class="launch-confirm" id="launchConfirm">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8.5L6.2 12L13 4" stroke="#0F6E5B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Confirmed — service marked ready for production launch.
+          </div>
+        </div>
+      </section>
+
+      <footer class="sheet-foot">
+        <span>Service Definition Document · {{Service Abbreviation}}</span>
+        <span>{{Service Definer Department Name}}</span>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('nav.toc a');
+  const sections = Array.from(links).map(a => document.getElementById(a.dataset.target));
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      const idx = sections.indexOf(entry.target);
+      if (idx === -1) return;
+      if (entry.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        links[idx].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-15% 0px -70% 0px', threshold: 0 });
+  sections.forEach(s => s && io.observe(s));
+  
+    // Launch approval interaction
+  const checkbox = document.getElementById('disclaimerCheck');
+  const launchCard = document.getElementById('launchCard');
+  const launchBtn = document.getElementById('launchBtn');
+  const statusText = document.getElementById('launchStatusText');
+  const confirmMsg = document.getElementById('launchConfirm');
+
+  checkbox.addEventListener('change', () => {
+    const checked = checkbox.checked;
+    launchCard.classList.toggle('is-checked', checked);
+    launchBtn.disabled = !checked;
+    statusText.textContent = checked ? 'Ready to launch' : 'Awaiting confirmation';
+    if (!checked) confirmMsg.classList.remove('show');
+  });
+
+  launchBtn.addEventListener('click', () => {
+    if (launchBtn.disabled) return;
+    confirmMsg.classList.add('show');
+    statusText.textContent = 'Launched to production';
+  });
+</script>
+</body>
+</html>
+
+</script>
+</body>
+</html>

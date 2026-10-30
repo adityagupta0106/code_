@@ -1,0 +1,58 @@
+package com.serviceplus.tracking.ExceptionHandler;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.http.HttpStatus;
+
+import java.util.Map;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ErrorDetails {
+
+	private String message;
+	private HttpStatus status;
+	private Integer errorCode;
+	private Map<String,Object> data;
+
+	public ErrorDetails() {
+	}
+	
+	public ErrorDetails(String message, HttpStatus status, Integer errorCode) {
+		super();
+		this.message = message;
+		this.status = status;
+		this.errorCode = errorCode;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public HttpStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(HttpStatus status) {
+		this.status = status;
+	}
+
+	public Integer getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(Integer errorCode) {
+		this.errorCode = errorCode;
+	}
+
+    public Map<String, Object> getData() {
+        return data;
+    }
+
+    public void setData(Map<String, Object> data) {
+        this.data = data;
+    }
+
+}
