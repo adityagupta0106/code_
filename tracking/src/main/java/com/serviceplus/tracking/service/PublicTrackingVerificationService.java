@@ -229,7 +229,7 @@ public Map<String, Object> sendReferenceEmailOtp(PublicApplicationTrackingReques
     }
 
     private void onlyFields(Map<String,Object> body,String... allowed) {
-        if(!Set.of(allowed).containsAll(body.keySet())) throw new SPRuntimeError("Unexpected verification fields",HttpStatus.BAD_REQUEST);
+        if(body == null || !Set.of(allowed).containsAll(body.keySet())) throw new SPRuntimeError("Unexpected verification fields",HttpStatus.BAD_REQUEST);
     }
 
     private Map<String,Object> matchModeO(String tenant,int service,String method,Map<String,Object> input) {
