@@ -1,15 +1,12 @@
 package com.serviceplus.tracking.service;
 
-import com.serviceplus.tracking.ExceptionHandler.SPRuntimeError;
 import com.serviceplus.tracking.dto.*;
 import com.serviceplus.tracking.entity.ApplicantInbox;
 import com.serviceplus.tracking.entity.ApplicationTracking;
 import com.serviceplus.tracking.entity.ApplicationTrackingHolder;
 import com.serviceplus.tracking.entity.UserInbox;
-import com.serviceplus.tracking.feignClient.InstanceConfigRegistryFeignClient;
 import com.serviceplus.tracking.repository.*;
 import com.serviceplus.tracking.repository.specification.ApplicantInboxSpecification;
-import com.serviceplus.tracking.repository.specification.ApplicationTrackingSpecification;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +15,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.serviceplus.tracking.utility.ApplicationConstants.*;
@@ -34,13 +25,9 @@ import static com.serviceplus.tracking.utility.CommonUtil.getUserSessionDetails;
 import static com.serviceplus.tracking.utility.CommonUtil.isEmpty;
 import static java.util.Objects.isNull;
 
-import org.springframework.beans.factory.annotation.Value;
 
-import com.serviceplus.tracking.feignClient.ServiceMetadataFeignClient;
 
-import com.serviceplus.tracking.feignClient.FormDesignerFeignClient;
 
-import com.serviceplus.tracking.feignClient.UserManagmentFeignClient;
 
 @Service
 public class ApplicationTrackingService {
