@@ -1155,340 +1155,181 @@ public class ServiceCatalogueService {
 	
 	
 	
-	@Transactional(readOnly = true)
-	public ServiceCatalogueDataDTO buildServiceCatalogueData(Integer serviceId) {
-
-	    if (serviceId == null)
-	        throw new SPRuntimeError("Service id is required", HttpStatus.BAD_REQUEST);
-
-	    ServiceDefinition serviceDefinition = serviceDefinitionRepository.findById(serviceId)
-	            .orElseThrow(() -> new SPRuntimeError("Service not found", HttpStatus.NOT_FOUND));
-
-	    ServiceDefinitionDTO definition = serviceDefinition.getDefinitionJson();
-	    ServiceCatalogueDataDTO response = new ServiceCatalogueDataDTO();
-
-	    // SERVICE IDENTITY
-	    ServiceCatalogueDataDTO.ServiceIdentity identity = new ServiceCatalogueDataDTO.ServiceIdentity();
-	    identity.setBaseServiceId(serviceDefinition.getBaseServiceId());
-	    identity.setServiceId(serviceDefinition.getServiceId());
-	    identity.setStateId(serviceDefinition.getStateId() == null ? null : String.valueOf(serviceDefinition.getStateId()));
-	    identity.setServiceName(definition != null && definition.getName() != null
-	            ? definition.getName()
-	            : serviceDefinition.getServiceName());
-	    response.setServiceIdentity(identity);
-
-	    // SERVICE DETAILS
-	    ServiceCatalogueDataDTO.ServiceDetails details = new ServiceCatalogueDataDTO.ServiceDetails();
-
-	    if (definition != null) {
-	        details.setDescription(definition.getDescription());
-
-	        if (definition.getType() != null)
-	            details.setServiceType(definition.getType().getLabel());
-
-	        if (definition.getRegisterToAvail() != null)
-	            details.setApplicantType("Y".equalsIgnoreCase(definition.getRegisterToAvail())
-	                    ? "Registered"
-	                    : "Unregistered");
-	    }
-
-	    response.setServiceDetails(details);
-
-	    // PROCESS FLOW
-	    ServiceProcessFlow processFlow = processFlowRepository.findByServiceId(serviceId);
-	    ProcessFlowDTO processFlowJson = processFlow == null ? null : processFlow.getProcessFlowJson();
-
-	    ProcessFlowDTO.NodeDTO submissionNode = null;
-	    ProcessFlowDTO.NodeDTO firstNode = null;
-
-	    if (processFlowJson != null && processFlowJson.getNodes() != null) {
-
-	        submissionNode = processFlowJson.getNodes().stream()
-	                .filter(n -> n != null
-	                        && ApplicationConstants.SUBMISSION_NODE_TYPE.equals(n.getType())
-	                        && n.getData() != null
-	                        && ApplicationConstants.SUBMISSION_NODE_NAME.equals(n.getData().getName()))
-	                .findFirst()
-	                .orElse(null);
-
-	        if (submissionNode != null && processFlowJson.getEdges() != null) {
-
-	            String submissionId = submissionNode.getId();
-
-	            String firstNodeId = processFlowJson.getEdges().stream()
-	                    .filter(e -> e != null && submissionId.equals(e.getSource()))
-	                    .map(e -> e.getTarget())
-	                    .findFirst()
-	                    .orElse(null);
-
-	            if (firstNodeId != null) {
-	                firstNode = processFlowJson.getNodes().stream()
-	                        .filter(n -> n != null && firstNodeId.equals(n.getId()))
-	                        .findFirst()
-	                        .orElse(null);
-	            }
-	        }
-	    }
-
-	    // COVERAGE
-	    ServiceCatalogueDataDTO.Coverage coverage = new ServiceCatalogueDataDTO.Coverage();
-	    ServiceDeliveryUnitDefinition sdu = serviceDeliveryUnitDefinitionRepository.findByServiceId(serviceId);
-	    boolean coverageFromSdu = false;
-
-	    if (sdu != null && sdu.getServiceDeliveryUnits() != null && !sdu.getServiceDeliveryUnits().isEmpty()) {
-
-	        ServiceDeliveryUnitDTO.ServiceDeliveryUnitJSON unit = sdu.getServiceDeliveryUnits().get(0);
-
-	        if (unit != null && unit.getServiceDeliveryUnit() != null) {
-
-	            coverage.setFirstAcceptingUnit(unit.getServiceDeliveryUnit().getLabel());
-
-	            if (unit.getServiceDeliveryUnit().getEntity() != null)
-	                coverage.setFirstAcceptingDepartment(unit.getServiceDeliveryUnit().getEntity().getLabel());
-
-	            coverageFromSdu = true;
-	        }
-	    }
-
-	    if (!coverageFromSdu
-	            && firstNode != null
-	            && !ApplicationConstants.GATEWAY_NODE_TYPE.equals(firstNode.getType())
-	            && firstNode.getData() != null
-	            && firstNode.getData().getEntities() != null
-	            && !firstNode.getData().getEntities().isEmpty()) {
-
-	        ProcessFlowDTO.Entities entity = firstNode.getData().getEntities().get(0);
-
-	        if (entity.getEntity() != null)
-	            coverage.setFirstAcceptingDepartment(entity.getEntity().getLabel());
-	    }
-
-	    response.setCoverage(coverage);
-
-	    // SUBMISSION
-	    ServiceCatalogueDataDTO.Submission submission = new ServiceCatalogueDataDTO.Submission();
-
-	    if (submissionNode != null && submissionNode.getData() != null) {
-
-	        if (submissionNode.getData().getMode() != null) {
-
-	            List<String> modes = submissionNode.getData().getMode().stream()
-	                    .filter(m -> m != null && m.getLabel() != null)
-	                    .map(m -> m.getLabel())
-	                    .toList();
-
-	            if (!modes.isEmpty())
-	                submission.setModeOfSubmission(modes);
-	        }
-
-	        TaskPaymentMappingDTO payment = submissionNode.getData().getPayment();
-
-	        if (payment != null && Boolean.TRUE.equals(payment.getEnabled()) && payment.getChargeId() != null) {
-
-	            Optional<ServiceChargeDetail> chargeOptional = serviceChargeRepository.findById(payment.getChargeId());
-
-	            if (chargeOptional.isPresent()) {
-
-	                ServiceChargeDetail chargeDetail = chargeOptional.get();
-
-	                if (serviceId.equals(chargeDetail.getServiceId())) {
-
-	                    ServiceChargeDTO charge = chargeDetail.getServiceChargeJson();
-
-	                    if (charge != null) {
-
-	                        if (charge.getPaymentModes() != null) {
-
-	                            List<String> paymentModes = charge.getPaymentModes().stream()
-	                                    .filter(m -> m != null && m.getLabel() != null)
-	                                    .map(ServiceChargeDTO.PaymentModeDTO::getLabel)
-	                                    .distinct()
-	                                    .toList();
-
-	                            if (!paymentModes.isEmpty())
-	                                submission.setPaymentMode(paymentModes);
-	                        }
-
-	                        if (charge.getChargeTypeList() != null) {
-
-	                            double total = charge.getChargeTypeList().stream()
-	                                    .filter(c -> c != null && c.getAmount() != null)
-	                                    .mapToDouble(ServiceChargeDTO.ChargeTypeDTO::getAmount)
-	                                    .sum();
-
-	                            if (total > 0)
-	                                submission.setChargeAmount(
-	                                        total == Math.rint(total)
-	                                                ? String.valueOf((long) total)
-	                                                : String.valueOf(total));
-	                        }
-	                    }
-	                }
-	            }
-	        }
-	    }
-
-	    response.setSubmission(submission);
-
-	    // BENEFICIARY
-	    Optional<ServiceCatalogueServiceMapping> mappingOptional =
-	            mappingRepository.findByServiceId(Long.valueOf(serviceId));
-
-	    if (mappingOptional.isPresent()) {
-
-	        Optional<ServiceCatalogueConfiguration> configOptional =
-	                configurationRepository.findById(mappingOptional.get().getConfigurationId());
-
-	        if (configOptional.isPresent() && configOptional.get().getData() != null) {
-
-	            JsonNode profile = configOptional.get().getData().path("beneficiaryProfile");
-
-	            if (profile.path("enabled").asBoolean(false)) {
-
-	                JsonNode answers = profile.path("answers");
-	                List<ServiceCatalogueDataDTO.Beneficiary> beneficiaries = new ArrayList<>();
-
-	                JsonNode applicant = answers.path("applicant_type");
-
-	                if (applicant.path("enabled").asBoolean(false)
-	                        && applicant.path("who_can_apply").isArray()) {
-
-	                    List<String> values = new ArrayList<>();
-	                    applicant.path("who_can_apply").forEach(v -> {
-	                        if (!v.asText().isBlank()) values.add(v.asText());
-	                    });
-
-	                    if (!values.isEmpty()) {
-	                        ServiceCatalogueDataDTO.Beneficiary b = new ServiceCatalogueDataDTO.Beneficiary();
-	                        b.setAttribute("Type of Beneficiary");
-	                        b.setValues(values);
-	                        beneficiaries.add(b);
-	                    }
-	                }
-
-	                JsonNode gender = answers.path("gender");
-
-	                if (gender.path("enabled").asBoolean(false)
-	                        && gender.path("applicable_gender").isArray()) {
-
-	                    List<String> values = new ArrayList<>();
-	                    gender.path("applicable_gender").forEach(v -> {
-	                        if (!v.asText().isBlank()) values.add(v.asText());
-	                    });
-
-	                    if (!values.isEmpty()) {
-	                        ServiceCatalogueDataDTO.Beneficiary b = new ServiceCatalogueDataDTO.Beneficiary();
-	                        b.setAttribute("Gender");
-	                        b.setValues(values);
-	                        beneficiaries.add(b);
-	                    }
-	                }
-
-	                JsonNode age = answers.path("age");
-
-	                if (age.path("enabled").asBoolean(false)) {
-
-	                    String min = age.path("age_range").path("min_age").asText(null);
-	                    String max = age.path("age_range").path("max_age").asText(null);
-	                    String ageValue = null;
-
-	                    if (min != null && !min.isBlank() && max != null && !max.isBlank())
-	                        ageValue = min + "-" + max + " yrs";
-	                    else if (min != null && !min.isBlank())
-	                        ageValue = min + " yrs & above";
-	                    else if (max != null && !max.isBlank())
-	                        ageValue = "Up to " + max + " yrs";
-
-	                    if (ageValue != null) {
-	                        ServiceCatalogueDataDTO.Beneficiary b = new ServiceCatalogueDataDTO.Beneficiary();
-	                        b.setAttribute("Age Group");
-	                        b.setValues(List.of(ageValue));
-	                        beneficiaries.add(b);
-	                    }
-	                }
-
-	                JsonNode family = answers.path("family_household");
-
-	                if (family.path("enabled").asBoolean(false)
-	                        && family.path("marital_status").isArray()) {
-
-	                    List<String> values = new ArrayList<>();
-	                    family.path("marital_status").forEach(v -> {
-	                        if (!v.asText().isBlank()) values.add(v.asText());
-	                    });
-
-	                    if (!values.isEmpty()) {
-	                        ServiceCatalogueDataDTO.Beneficiary b = new ServiceCatalogueDataDTO.Beneficiary();
-	                        b.setAttribute("Marital Status");
-	                        b.setValues(values);
-	                        beneficiaries.add(b);
-	                    }
-	                }
-
-	                JsonNode docs = answers.path("required_documents");
-
-	                if (docs.path("enabled").asBoolean(false)
-	                        && docs.path("mandatory_documents").isArray()) {
-
-	                    List<String> values = new ArrayList<>();
-	                    docs.path("mandatory_documents").forEach(v -> {
-	                        if (!v.asText().isBlank()) values.add(v.asText());
-	                    });
-
-	                    if (!values.isEmpty()) {
-	                        ServiceCatalogueDataDTO.Beneficiary b = new ServiceCatalogueDataDTO.Beneficiary();
-	                        b.setAttribute("Identity Document");
-	                        b.setValues(values);
-	                        beneficiaries.add(b);
-	                    }
-	                }
-
-	                if (!beneficiaries.isEmpty())
-	                    response.setBeneficiary(beneficiaries);
-	            }
-	        }
-	    }
-
-	    // SLA
-	    Integer slaDays = null;
-
-	    if (definition != null
-	            && definition.getServiceLevel() != null
-	            && definition.getServiceLevel().getQuantity() != null
-	            && definition.getServiceLevel().getUnit() != null
-	            && "d".equalsIgnoreCase(definition.getServiceLevel().getUnit().getValue())) {
-
-	        try {
-	            slaDays = Integer.valueOf(definition.getServiceLevel().getQuantity());
-	        } catch (NumberFormatException ignored) {
-	        }
-	    }
-
-	    // DELIVERABLES
-	    List<ServiceOutputFormat> outputs =
-	            serviceOutputFormatRepository.findAllDocumentByServiceId(serviceId);
-
-	    if (outputs != null && !outputs.isEmpty()) {
-
-	        List<ServiceCatalogueDataDTO.Deliverable> deliverables = new ArrayList<>();
-
-	        for (ServiceOutputFormat output : outputs) {
-
-	            if (output.getOutputFormatJson() == null)
-	                continue;
-
-	            ServiceCatalogueDataDTO.Deliverable d = new ServiceCatalogueDataDTO.Deliverable();
-	            d.setName(output.getOutputFormatJson().getTemplateName());
-	            d.setSlaDays(slaDays);
-	            deliverables.add(d);
-	        }
-
-	        if (!deliverables.isEmpty())
-	            response.setDeliverables(deliverables);
-	    }
-
-	    return response;
-	}
+	    @Transactional(readOnly = true)
+    public ServiceCatalogueDataDTO buildServiceCatalogueData(Integer serviceId) {
+        if (serviceId == null) {
+            throw new SPRuntimeError("Service id is required", HttpStatus.BAD_REQUEST);
+        }
+
+        ServiceDefinition sd = serviceDefinitionRepository.findById(serviceId)
+                .orElseThrow(() -> new SPRuntimeError("Service not found", HttpStatus.NOT_FOUND));
+        ServiceDefinitionDTO def = sd.getDefinitionJson();
+        ServiceLog log = serviceLogRepository.findByServiceId(serviceId);
+
+        // Workflow: submission roles + department/state labels
+        ServiceProcessFlow flow = processFlowRepository.findByServiceId(serviceId);
+        ProcessFlowDTO.NodeDTO start = flow == null || flow.getProcessFlowJson() == null
+                || flow.getProcessFlowJson().getNodes() == null ? null
+                : flow.getProcessFlowJson().getNodes().stream()
+                    .filter(n -> n != null && "submission".equals(n.getType()))
+                    .findFirst().orElse(null);
+
+        List<String> modes = new ArrayList<>();
+        String department = null;
+        String state = null;
+        if (start != null && start.getData() != null) {
+            if (start.getData().getMode() != null) {
+                modes = start.getData().getMode().stream()
+                        .filter(m -> m != null && m.getLabel() != null)
+                        .map(m -> m.getLabel()).distinct().toList();
+            }
+            if (start.getData().getEntities() != null) {
+                for (ProcessFlowDTO.Entities entity : start.getData().getEntities()) {
+                    if (entity == null) continue;
+                    if (department == null && entity.getEntity() != null)
+                        department = entity.getEntity().getLabel();
+                    if (state == null && entity.getClcDetail() != null)
+                        state = entity.getClcDetail().getLabel();
+                    if (department != null && state != null) break;
+                }
+            }
+        }
+
+        // Fallback if no department/state is configured on the submission node
+        if (department == null || state == null) {
+            ServiceDeliveryUnitDefinition sdu = serviceDeliveryUnitDefinitionRepository.findByServiceId(serviceId);
+            if (sdu != null && sdu.getServiceDeliveryUnits() != null) {
+                for (ServiceDeliveryUnitDTO.ServiceDeliveryUnitJSON unit : sdu.getServiceDeliveryUnits()) {
+                    if (unit == null || unit.getServiceDeliveryUnit() == null) continue;
+                    var hierarchy = unit.getServiceDeliveryUnit();
+                    if (department == null && hierarchy.getEntity() != null)
+                        department = hierarchy.getEntity().getLabel();
+                    if (state == null && hierarchy.getClcDetail() != null)
+                        state = hierarchy.getClcDetail().getLabel();
+                    if (department != null && state != null) break;
+                }
+            }
+        }
+
+        List<String> goals = def == null || def.getGoals() == null ? List.of()
+                : def.getGoals().stream()
+                    .filter(g -> g != null && g.getLabel() != null)
+                    .map(g -> g.getLabel()).toList();
+
+        // Catalogue configuration: all enabled beneficiary fields, not just five
+        List<String> availedBy = new ArrayList<>();
+        List<ServiceCatalogueDataDTO.Beneficiary> beneficiary = new ArrayList<>();
+        Optional<ServiceCatalogueServiceMapping> mapping = mappingRepository.findByServiceId(serviceId.longValue());
+        if (mapping.isPresent()) {
+            JsonNode configData = configurationRepository.findDataByConfigurationId(
+                    mapping.get().getConfigurationId());
+            if (configData != null) {
+                JsonNode profile = configData.path("beneficiaryProfile");
+                if (profile.path("enabled").asBoolean(false)) {
+                    JsonNode answers = profile.path("answers");
+                    JsonNode applicant = answers.path("applicant_type");
+                    if (applicant.path("enabled").asBoolean(false)) {
+                        for (JsonNode v : applicant.path("who_can_apply")) {
+                            if (v.isTextual() && !v.asText().isBlank()) availedBy.add(v.asText());
+                        }
+                    }
+                    for (java.util.Iterator<Map.Entry<String, JsonNode>> categories = answers.fields(); categories.hasNext();) {
+                        JsonNode category = categories.next().getValue();
+                        if (!category.path("enabled").asBoolean(false)) continue;
+                        for (java.util.Iterator<Map.Entry<String, JsonNode>> fields = category.fields(); fields.hasNext();) {
+                            Map.Entry<String, JsonNode> f = fields.next();
+                            if ("enabled".equals(f.getKey())) continue;
+                            List<String> values = new ArrayList<>();
+                            JsonNode value = f.getValue();
+                            if (value.isArray()) {
+                                value.forEach(v -> { if (v.isValueNode() && !v.asText().isBlank()) values.add(v.asText()); });
+                            } else if (value.isObject()) {
+                                if ("age_range".equals(f.getKey())
+                                        && value.hasNonNull("min_age") && value.hasNonNull("max_age")) {
+                                    values.add(value.path("min_age").asText() + "-"
+                                            + value.path("max_age").asText() + " yrs");
+                                } else if ("dob_range".equals(f.getKey())
+                                        && value.hasNonNull("born_after") && value.hasNonNull("born_before")) {
+                                    values.add(value.path("born_after").asText() + " to "
+                                            + value.path("born_before").asText());
+                                } else {
+                                    value.fields().forEachRemaining(e -> {
+                                        JsonNode v = e.getValue();
+                                        if (v.isValueNode() && !v.isNull() && !v.asText().isBlank())
+                                            values.add(e.getKey().replace('_', ' ') + ": " + v.asText());
+                                    });
+                                }
+                            } else if (value.isValueNode() && !value.isNull() && !value.asText().isBlank()) {
+                                values.add(value.asText());
+                            }
+                            if (!values.isEmpty()) {
+                                String label = "who_can_apply".equals(f.getKey()) ? "Type of Beneficiary"
+                                        : java.util.Arrays.stream(f.getKey().split("_"))
+                                            .map(w -> w.substring(0, 1).toUpperCase(java.util.Locale.ROOT) + w.substring(1))
+                                            .collect(java.util.stream.Collectors.joining(" "));
+                                ServiceCatalogueDataDTO.Beneficiary b = new ServiceCatalogueDataDTO.Beneficiary();
+                                b.setAttribute(label);
+                                b.setValues(values);
+                                beneficiary.add(b);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        String deliverable = null;
+        List<ServiceOutputFormat> outputs = serviceOutputFormatRepository.findAllDocumentByServiceId(serviceId);
+        if (outputs != null) {
+            for (ServiceOutputFormat output : outputs) {
+                if (output.getOutputFormatJson() != null
+                        && output.getOutputFormatJson().getTemplateName() != null) {
+                    deliverable = output.getOutputFormatJson().getTemplateName();
+                    break;  // New contract supports a single deliverable string
+                }
+            }
+        }
+
+        // Same DTO pattern as the original code: instantiate + setters.
+        ServiceCatalogueDataDTO response = new ServiceCatalogueDataDTO();
+
+        ServiceCatalogueDataDTO.ServiceIdentity identity = new ServiceCatalogueDataDTO.ServiceIdentity();
+        identity.setTenantId(log == null ? null : log.getTenantId());
+        identity.setBaseServiceId(sd.getBaseServiceId());
+        identity.setServiceId(sd.getServiceId());
+        identity.setServiceName(def != null && def.getName() != null ? def.getName() : sd.getServiceName());
+        identity.setDepartment(department);
+        identity.setState(state);
+        identity.setStateId(sd.getStateId() == null ? null : String.valueOf(sd.getStateId()));
+        response.setServiceIdentity(identity);
+
+        ServiceCatalogueDataDTO.ServiceDetails details = new ServiceCatalogueDataDTO.ServiceDetails();
+        details.setDescription(def == null ? null : def.getDescription());
+        details.setSgdGoals(goals);
+        ServiceCatalogueDataDTO.HowToApply how = new ServiceCatalogueDataDTO.HowToApply();
+        how.setMode(modes);
+        details.setHowToApply(how);
+        response.setServiceDetails(details);
+
+        response.setAvailedBy(availedBy);
+        response.setBeneficiary(beneficiary);
+        response.setApplyModes(modes);
+
+        // Business rule for submissionType not verified yet.
+        response.setSubmission(new ServiceCatalogueDataDTO.Submission());
+
+        ServiceCatalogueDataDTO.WhatYouReceive what = new ServiceCatalogueDataDTO.WhatYouReceive();
+        what.setDeliverable(deliverable);
+        what.setDeliveryModes(new ArrayList<>());
+        response.setWhatYouReceive(what);
+
+        // Documents: senior confirmation pending.
+        ServiceCatalogueDataDTO.Documents documents = new ServiceCatalogueDataDTO.Documents();
+        documents.setItems(new ArrayList<>());
+        response.setDocuments(documents);
+
+        return response;
+    }
 	
 	@Transactional(readOnly = true)
 	public Map<String, Object> getServiceCatalogue(
