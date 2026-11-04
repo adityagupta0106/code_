@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 @FeignClient(name="SERVICEMETADATA",path="/services")
 public interface ServiceMataDataFeignClient {
@@ -18,6 +19,7 @@ public interface ServiceMataDataFeignClient {
     @PostMapping("/apply/serviceMetaData")
     ResponseEntity<ServiceMetadataDTO> getServiceMetadata(@RequestParam("serviceId") Integer serviceId);
     @GetMapping("/internal/tracking/configuration")
-    java.util.Map<String,Object> getPublicTrackingConfiguration(@RequestParam("serviceId") Long serviceId,
+    java.util.Map<String,Object> getPublicTrackingConfiguration(@RequestHeader("X-Tracking-Internal-Token") String token,
+            @RequestParam("serviceId") Long serviceId,
         @RequestParam("tenantId") String tenantId);
 }
