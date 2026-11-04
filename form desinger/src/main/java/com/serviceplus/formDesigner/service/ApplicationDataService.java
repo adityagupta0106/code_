@@ -1272,9 +1272,27 @@ public ApplicationData getTrackingApplicationData(
                 "Submission template unavailable");
     }
 
-    // LOCAL TEST ONLY:
-    // Template may belong to a shared-form tenant.
-    // Production must verify the authorized sharing relationship.
+    // A form owned by another tenant is allowed only when the submitted
+    // application has an authoritative form_data_reference for this exact scope.
+    // Never trust formId alone to establish a cross-tenant sharing relationship.
+    if (template.getTenantId() == null || template.getTenantId().isBlank()) {
+        throw new IllegalStateException("Submission form tenant unavailable");
+    }
+    if (!tenantId.equals(template.getTenantId())) {
+        List<FormDataReference> references = formDataReferenceRepository == null
+                ? Collections.emptyList()
+                : formDataReferenceRepository.findByServiceIdAndApplicationId(serviceId, applId);
+        boolean authorizedReference = references != null && references.stream().anyMatch(ref ->
+                tenantId.equals(ref.getTenantId())
+                        && serviceId.equals(ref.getServiceId())
+                        && applId.equals(ref.getApplicationId())
+                        && submitted.getDataId().equals(ref.getDataId())
+                        && submitted.getFormId().equals(ref.getFormId())
+                        && "s_1".equals(ref.getTaskId()));
+        if (!authorizedReference) {
+            throw new IllegalStateException("Submission form tenant unauthorized");
+        }
+    }
 
     ApplicationData copy =
             new ObjectMapper().convertValue(
@@ -1384,6 +1402,13 @@ public Map<String, Object> matchTrackingApplications(Map<String, Object> body) {
         if (fields.size() != configured.size()
                 || !fields.keySet().equals(supplied.keySet())) {
             throw new IllegalArgumentException("Invalid tracking fields");
+        }
+
+        // Attribute-only access requires an operator-approved, high-entropy
+        // identifying field. Name, DOB, address and other guessable fields
+        // must never grant public access on their own.
+        if (!hasApprovedStrongTrackingAttribute(tenant, service, fields.keySet())) {
+            return Map.of("applicationIds", List.of(), "sufficient", false);
         }
 
         for (String id : fields.keySet()) {
@@ -1541,15 +1566,10 @@ public Map<String, Object> matchTrackingApplications(Map<String, Object> body) {
                 }
 
             } catch (IllegalStateException ex) {
-
-                if (matches.size() > 100) {
-                    throw ex;
-                }
-
-                LOGGER.warn(
-                        "Skipping invalid tracking submission: serviceId={}, applId={}, reason={}",
-                        service, row.getApplId(), ex.getMessage()
-                );
+                // Any unreadable/ambiguous submission makes the search incomplete.
+                // Never issue a public verification proof from partial results.
+                LOGGER.error("Public tracking verification scan failed for serviceId={}", service, ex);
+                throw new IllegalStateException("Submission verification unavailable", ex);
             }
         }
 
@@ -1592,6 +1612,28 @@ public Map<String, Object> matchTrackingApplications(Map<String, Object> body) {
         } else if(node.isArray()) node.elements().forEachRemaining(child->trackingTemplateFields(child,fields));
     }
 
+
+    /**
+     * Server-side allowlist syntax: tenantId:serviceId:attributeId
+     * Multiple entries may be separated by commas, semicolons or newlines.
+     * This is an explicit policy, not a claim that any configured form field
+     * automatically provides sufficient identity assurance.
+     */
+    private boolean hasApprovedStrongTrackingAttribute(String tenant, int service, Set<String> configuredIds) {
+        if (trackingStrongAttributes == null || trackingStrongAttributes.isBlank()) {
+            return false;
+        }
+        for (String entry : trackingStrongAttributes.split("[,;\\r\\n]+")) {
+            String[] parts = entry.trim().split(":", 3);
+            if (parts.length == 3
+                    && tenant.equals(parts[0].trim())
+                    && Integer.toString(service).equals(parts[1].trim())
+                    && configuredIds.contains(parts[2].trim())) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     // Tracking field comparisons stay here because only this service uses them.
     static String normalizeTrackingValue(Object value,int type) {
