@@ -119,6 +119,96 @@ public class ApplicationTemplateService {
         this.formDataReferenceRepository = formDataReferenceRepository;
     }
 
+
+    /**
+     * Only the document rules needed by the public catalogue.
+     * Reuses the file-upload configuration used by the real upload flow.
+     */
+    public Map<String, Object> getCatalogueDocuments(String formId, String tenantId) throws Exception {
+        if (formId == null || formId.isBlank() || tenantId == null || tenantId.isBlank()) {
+            throw new SPRuntimeError("Form ID and tenant ID are required", HttpStatus.BAD_REQUEST);
+        }
+
+        ApplicationTemplate template = applicationTemplateRepository.findById(formId)
+                .orElseThrow(() -> new SPRuntimeError("Form not found", HttpStatus.NOT_FOUND));
+
+        // Do not expose another tenant's form, or an archived/inactive form.
+        if (!tenantId.equals(template.getTenantId())
+                || Boolean.TRUE.equals(template.getArchive())
+                || FormStatus.INACTIVE.getValue().equals(template.getStatus())) {
+            throw new SPRuntimeError("Form not found", HttpStatus.NOT_FOUND);
+        }
+        if (template.getFormJsonData() == null) {
+            throw new SPRuntimeError("Form configuration is missing", HttpStatus.UNPROCESSABLE_ENTITY);
+        }
+
+        CreateUploadSessionsRequest uploadRules = new CreateUploadSessionsRequest();
+        ApplicationTemplateCommonUtil.setFileAttributesDTO(template, uploadRules);
+
+        List<Map<String, Object>> items = new ArrayList<>();
+        boolean anyMandatory = false;
+        boolean unknownMandatory = false;
+        for (CreateUploadSessionsRequest.FileUploadRequest file : uploadRules.getFiles()) {
+            JSONObject attribute = ApplicationTemplateCommonUtil
+                    .findAttributeByUniqueId(template.getFormJsonData(), file.getReferenceId())
+                    .orElseThrow(() -> new SPRuntimeError("Invalid upload configuration", HttpStatus.UNPROCESSABLE_ENTITY));
+
+            Boolean mandatory = catalogueDocumentMandatory(attribute);
+            anyMandatory |= Boolean.TRUE.equals(mandatory);
+            unknownMandatory |= mandatory == null;
+
+            List<String> accepted = file.getAllowedMime() == null ? List.of()
+                    : file.getAllowedMime().stream()
+                        .filter(Objects::nonNull)
+                        .map(this::catalogueDocumentFormat)
+                        .filter(value -> !value.isBlank())
+                        .distinct()
+                        .toList();
+
+            Map<String, Object> item = new LinkedHashMap<>();
+            item.put("name", file.getCategory());
+            item.put("mandatory", mandatory);
+            item.put("accepted", accepted);
+            items.add(item);
+        }
+
+        Map<String, Object> response = new LinkedHashMap<>();
+        response.put("required", items.isEmpty() ? Boolean.FALSE
+                : anyMandatory ? Boolean.TRUE : unknownMandatory ? null : Boolean.FALSE);
+        response.put("items", items);
+        return response;
+    }
+
+    private Boolean catalogueDocumentMandatory(JSONObject attribute) {
+        JSONObject validation = attribute.optJSONObject("validationSettings");
+        JSONObject required = validation == null ? null : validation.optJSONObject("required");
+        if (required == null || !required.has("value") || required.isNull("value")) {
+            return null; // Unknown; do not mistake 'supported' for 'required'.
+        }
+        Object value = required.get("value");
+        if (value instanceof Boolean) {
+            return (Boolean) value;
+        }
+        String flag = String.valueOf(value).trim();
+        if ("true".equalsIgnoreCase(flag) || "1".equals(flag) || "Y".equalsIgnoreCase(flag)) return true;
+        if ("false".equalsIgnoreCase(flag) || "0".equals(flag) || "N".equalsIgnoreCase(flag)) return false;
+        return null;
+    }
+
+    private String catalogueDocumentFormat(String mime) {
+        String value = mime.trim().toLowerCase(java.util.Locale.ROOT);
+        if (value.startsWith(".")) return value.substring(1);
+        return switch (value) {
+            case "application/pdf" -> "pdf";
+            case "image/gif" -> "gif";
+            case "image/png" -> "png";
+            case "image/jpeg", "image/jpg" -> "jpg";
+            case "application/msword" -> "doc";
+            case "application/vnd.openxmlformats-officedocument.wordprocessingml.document" -> "docx";
+            default -> value; // Keep unknown MIME rather than guessing an extension.
+        };
+    }
+
 	public ResponseEntity<?> getApplications(String holderId, String formId, Integer page, Integer size) {
 		try {
 			ApplicationTemplate applicationTemplate = null;
