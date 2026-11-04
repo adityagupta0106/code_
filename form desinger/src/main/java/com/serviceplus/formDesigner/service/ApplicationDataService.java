@@ -1497,7 +1497,7 @@ public Map<String, Object> matchTrackingApplications(Map<String, Object> body) {
                         );
 
                 if (data == null || data.getFormId() == null) {
-                    continue;
+                    throw new IllegalStateException("Tracking submission form unavailable");
                 }
 
                 ApplicationTemplate template =
@@ -1506,11 +1506,7 @@ public Map<String, Object> matchTrackingApplications(Map<String, Object> body) {
                         );
 
                 if (template == null) {
-                    LOGGER.warn(
-                            "Tracking form template missing: serviceId={}, applId={}",
-                            service, row.getApplId()
-                    );
-                    continue;
+                    throw new IllegalStateException("Tracking submission template unavailable");
                 }
 
                 Map<String, Integer> actualFields = new HashMap<>();
@@ -1523,7 +1519,7 @@ public Map<String, Object> matchTrackingApplications(Map<String, Object> body) {
                 );
 
                 if (!(data.getFormData() instanceof Map<?, ?> stored)) {
-                    continue;
+                    throw new IllegalStateException("Tracking submission values unavailable");
                 }
 
                 boolean matched = true;
