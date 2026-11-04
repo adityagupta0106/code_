@@ -23,9 +23,11 @@ public interface ServiceMetadataFeignClient {
     WorkflowAssignmentKafkaEvent lookupAssignment(@RequestParam("serviceId") Integer serviceId, @RequestParam("taskId") String taskId, @RequestParam("userId") Long userId, @RequestParam("locationId") String locationId, @RequestHeader Map<String, String> headers);
 
     @GetMapping("/internal/tracking/configured-services")
-    List<Map<String, Object>> getConfigureServices(@RequestParam("tenantId") String tenantId);
+    List<Map<String, Object>> getConfigureServices(@RequestHeader("X-Tracking-Internal-Token") String token,
+            @RequestParam("tenantId") String tenantId);
 
     @GetMapping("/internal/tracking/configuration")
-    Map<String, Object> getPublicTrackingConfiguration(@RequestParam("serviceId") Long serviceId,
+    Map<String, Object> getPublicTrackingConfiguration(@RequestHeader("X-Tracking-Internal-Token") String token,
+            @RequestParam("serviceId") Long serviceId,
             @RequestParam("tenantId") String tenantId);
 }
