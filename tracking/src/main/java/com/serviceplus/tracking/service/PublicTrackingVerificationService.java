@@ -105,7 +105,7 @@ public class PublicTrackingVerificationService {
 
     public List<Map<String, Object>> getConfiguredServices(HttpServletRequest request) {
         String tenantId = resolveTenantId(request);
-        return serviceMetadataFeignClient.getConfigureServices(tenantId);
+        return serviceMetadataFeignClient.getConfigureServices(trackingInternalToken, tenantId);
     }
 
     public Map<String, Object> getPublicTrackingConfig(Long serviceId, HttpServletRequest request) {
@@ -113,7 +113,7 @@ public class PublicTrackingVerificationService {
             throw new SPRuntimeError("Invalid service serviceId", HttpStatus.BAD_GATEWAY);
         }
         String tenantId = resolveTenantId(request);
-        return serviceMetadataFeignClient.getPublicTrackingConfiguration(serviceId, tenantId);
+        return serviceMetadataFeignClient.getPublicTrackingConfiguration(trackingInternalToken, serviceId, tenantId);
     }
 
 private Map<String, Object> fetchTrackingAttributes(String tenantId,Integer serviceId,String applId,List<String> attributeIds) {
@@ -176,7 +176,7 @@ public Map<String, Object> sendReferenceEmailOtp(PublicApplicationTrackingReques
     ApplicationTracking application = applications.get(0);
     Integer serviceId = application.getServiceId();
     String applId = application.getApplId();
-    Map<String, Object> config =serviceMetadataFeignClient.getPublicTrackingConfiguration(serviceId.longValue(), tenantId);
+    Map<String, Object> config =serviceMetadataFeignClient.getPublicTrackingConfiguration(trackingInternalToken, serviceId.longValue(), tenantId);
     Object types = config.get("trackingTypes");
     if (!(types instanceof List<?> trackingTypes)|| !trackingTypes.contains("EMAIL_OTP")) {
         throw new SPRuntimeError("Email verification is not available",HttpStatus.BAD_REQUEST);
@@ -215,7 +215,7 @@ public Map<String, Object> sendReferenceEmailOtp(PublicApplicationTrackingReques
     private Map<String,Object> modeOConfig(String tenant,int service,String method) {
         publicAuthorization.requireEnabled();
         if(trackingInternalToken==null || trackingInternalToken.isBlank()) throw new SPRuntimeError("Tracking internal authentication unavailable",HttpStatus.SERVICE_UNAVAILABLE);
-        Map<String,Object> config=serviceMetadataFeignClient.getPublicTrackingConfiguration((long)service,tenant);
+        Map<String,Object> config=serviceMetadataFeignClient.getPublicTrackingConfiguration(trackingInternalToken, (long)service,tenant);
         if(config==null || !(config.get("serviceId") instanceof Number configuredService) || configuredService.longValue()!=service
             || !(config.get("trackingTypes") instanceof List<?> types)
             || types.isEmpty() || (method!=null && !types.contains(method))) throw PublicTrackingAuthorizationService.denied();
