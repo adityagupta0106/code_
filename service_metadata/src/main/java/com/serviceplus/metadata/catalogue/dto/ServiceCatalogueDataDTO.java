@@ -163,6 +163,8 @@ public class ServiceCatalogueDataDTO {
 
 		private String localLanguage;
 
+		private Long departmentId;
+
 		private String department;
 
 		private String state;
@@ -236,6 +238,14 @@ public class ServiceCatalogueDataDTO {
 
 			this.localLanguage = localLanguage;
 
+		}
+
+		public Long getDepartmentId() {
+			return departmentId;
+		}
+
+		public void setDepartmentId(Long departmentId) {
+			this.departmentId = departmentId;
 		}
 
 		public String getDepartment() {
