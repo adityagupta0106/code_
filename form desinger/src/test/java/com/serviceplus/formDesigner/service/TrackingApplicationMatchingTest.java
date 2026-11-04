@@ -3,6 +3,8 @@ package com.serviceplus.formDesigner.service;
 import com.serviceplus.formDesigner.controller.ApplicationDataController;
 import com.serviceplus.formDesigner.repository.*;
 import com.serviceplus.formDesigner.feignClient.ServiceMataDataFeignClient;
+import com.serviceplus.formDesigner.returnToEdit.entity.FormDataReference;
+import com.serviceplus.formDesigner.returnToEdit.repository.FormDataReferenceRepository;
 import com.serviceplus.formDesigner.request.model.*;
 import com.serviceplus.formDesigner.util.*;
 import org.junit.jupiter.api.*;
@@ -21,6 +23,7 @@ class TrackingApplicationMatchingTest {
     FormEncryptionKeyRepository keys;
     ApplicationDataCommonUtil crypto;
     ServiceMataDataFeignClient metadata;
+    FormDataReferenceRepository references;
     ApplicationDataService service;
     ApplicationTemplate template;
     ApplicationData app;
@@ -28,13 +31,15 @@ class TrackingApplicationMatchingTest {
     @BeforeEach void setup() {
         repo=mock(ApplicationDataRepository.class);templates=mock(ApplicationTemplateRepository.class);
         keys=mock(FormEncryptionKeyRepository.class);crypto=mock(ApplicationDataCommonUtil.class);metadata=mock(ServiceMataDataFeignClient.class);
-        service=new ApplicationDataService(repo,templates,null,null,null,keys,null,crypto,null,null,metadata,null,null,null,null,null);
+        references=mock(FormDataReferenceRepository.class);
+        service=new ApplicationDataService(repo,templates,null,null,null,keys,null,crypto,null,null,metadata,null,null,null,null,references);
         ReflectionTestUtils.setField(service,"trackingMaxScanRecords",10000);
         ReflectionTestUtils.setField(service,"trackingStrongAttributes","tenant:7:secret");
+        ReflectionTestUtils.setField(service,"trackingInternalToken","test-internal-token");
         config=new HashMap<>();config.put("serviceId",7);config.put("trackingTypes",List.of("MOBILE_OTP","EMAIL_OTP","FORM_ATTRIBUTES"));
         config.put("mobileAttribute",field("mobile",1));config.put("emailAttribute",field("email",3));
         config.put("formAttributes",List.of(field("secret",1),field("dob",8),field("amount",2)));
-        when(metadata.getPublicTrackingConfiguration(7L,"tenant")).thenReturn(config);
+        when(metadata.getPublicTrackingConfiguration("test-internal-token",7L,"tenant")).thenReturn(config);
         template=new ApplicationTemplate();template.setFormId("form");template.setTenantId("tenant");
         template.setFormJsonData(Map.of("globalSetting",Map.of(),"formElements",List.of(
             element("mobile",1),element("email",3),element("secret",1),element("dob",8),element("amount",2))));
@@ -127,4 +132,66 @@ class TrackingApplicationMatchingTest {
 
     @Test void mismatchedMetadataScopeFailsClosed(){config.put("serviceId",8);assertThrows(IllegalArgumentException.class,()->service.matchTrackingApplications(attributes()));}
     @Test void bothTrackingOperationsRequireInternalAuthentication(){ApplicationDataService service=mock(ApplicationDataService.class);ApplicationDataController controller=new ApplicationDataController();ReflectionTestUtils.setField(controller,"applicationDataService",service);ReflectionTestUtils.setField(controller,"trackingInternalToken","synthetic-token");assertEquals(403,controller.matchTrackingApplications(Map.of(),null).getStatusCode().value());assertEquals(403,controller.getTrackingApplicationData(Map.of(),"wrong").getStatusCode().value());verifyNoInteractions(service);}
+
+    @Test
+    void strongFieldPolicyMustMatchTenantServiceAndField() {
+        ReflectionTestUtils.setField(service, "trackingStrongAttributes", "other:7:secret;tenant:8:secret");
+        Map<String, Object> result = service.matchTrackingApplications(attributes());
+        assertEquals(false, result.get("sufficient"));
+        verify(repo, never()).findSubmittedTrackingApplications(any(), any(), any());
+    }
+
+    @Test
+    void multipleStrongFieldPolicyEntriesAreSupported() {
+        ReflectionTestUtils.setField(service, "trackingStrongAttributes", "other:7:secret;tenant:7:secret");
+        assertEquals(List.of("app"), service.matchTrackingApplications(attributes()).get("applicationIds"));
+    }
+
+    @Test
+    void sharedFormRequiresExactSubmittedReference() {
+        template.setTenantId("form-owner");
+        FormDataReference ref = new FormDataReference();
+        ref.setTenantId("tenant");
+        ref.setServiceId(7);
+        ref.setApplicationId("app");
+        ref.setDataId("data-app");
+        ref.setFormId("form");
+        ref.setTaskId("s_1");
+        when(references.findByServiceIdAndApplicationId(7, "app")).thenReturn(List.of(ref));
+        assertNotNull(service.getTrackingApplicationData("tenant", 7, "app"));
+    }
+
+    @Test
+    void incorrectSharedFormReferenceIsRejected() {
+        template.setTenantId("form-owner");
+        FormDataReference ref = new FormDataReference();
+        ref.setTenantId("other-tenant");
+        ref.setServiceId(7);
+        ref.setApplicationId("app");
+        ref.setDataId("data-app");
+        ref.setFormId("form");
+        ref.setTaskId("s_1");
+        when(references.findByServiceIdAndApplicationId(7, "app")).thenReturn(List.of(ref));
+        assertThrows(IllegalStateException.class, () -> service.getTrackingApplicationData("tenant", 7, "app"));
+    }
+
+    @Test
+    void unreadableSubmissionMustNeverProducePartialPublicMatches() {
+        ApplicationData corrupted = data("corrupted");
+        when(repo.findTrackingApplicationData("tenant", 7, "corrupted")).thenReturn(List.of(corrupted, corrupted));
+        when(repo.findSubmittedTrackingApplications(eq("tenant"), eq(7), any()))
+                .thenAnswer(inv -> new PageImpl<>(List.of(app, corrupted), inv.getArgument(2), 2));
+        assertThrows(IllegalStateException.class, () -> service.matchTrackingApplications(attributes()));
+    }
+
+    @Test
+    void contactMatchesAlsoFailClosedIfSearchIsIncomplete() {
+        ApplicationData corrupted = data("corrupted");
+        when(repo.findTrackingApplicationData("tenant", 7, "corrupted")).thenReturn(List.of(corrupted, corrupted));
+        when(repo.findSubmittedTrackingApplications(eq("tenant"), eq(7), any()))
+                .thenAnswer(inv -> new PageImpl<>(List.of(app, corrupted), inv.getArgument(2), 2));
+        Map<String, Object> body = lookup("EMAIL_OTP");
+        body.put("contact", "synthetic@example.invalid");
+        assertThrows(IllegalStateException.class, () -> service.matchTrackingApplications(body));
+    }
 }
