@@ -33,4 +33,8 @@ public interface FormDesignerFeignClient {
 	
 	@PostMapping("/specific-attributes")
 	public ResponseEntity<?> getSpecificAttributes(@RequestBody SpecificAttributesReqDTO specificAttributesReqDTO);
+    @GetMapping("/b/catalogue/documents")
+    ResponseEntity<Map<String, Object>> getCatalogueDocuments(
+            @RequestParam("formId") String formId,
+            @RequestParam("tenantId") String tenantId);
 }
