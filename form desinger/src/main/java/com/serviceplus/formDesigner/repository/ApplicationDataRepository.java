@@ -33,7 +33,7 @@ public interface ApplicationDataRepository extends MongoRepository<ApplicationDa
 @Query("{ 'tenantId': ?0, 'serviceId': ?1, 'applId': ?2, 'draft': { '$ne': true } }")
 List<ApplicationData> findTrackingApplicationData(String tenantId,Integer serviceId,String applId);
 
-@Query("{ 'tenantId': ?0, 'serviceId': ?1, 'draft': { '$ne': true }, 'applId': { '$exists': true, '$nin': [null, ''] } }")
+@Query("{ 'tenantId': ?0, 'serviceId': ?1, 'taskId': 's_1', 'draft': { '$ne': true }, 'applId': { '$exists': true, '$nin': [null, ''] } }")
 Page<ApplicationData> findSubmittedTrackingApplications(String tenantId,Integer serviceId,Pageable pageable
 );
 
