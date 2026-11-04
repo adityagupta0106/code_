@@ -3,6 +3,8 @@ package com.serviceplus.metadata.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,6 +69,17 @@ public class ServiceMetadataController {
 	private String cookieSameSite;
 
 	private static final Logger serviceMetadataLogger = LogManager.getLogger("serviceMetadataLogger");
+
+    @Value("${TRACKING_INTERNAL_TOKEN:}")
+    private String trackingInternalToken;
+
+    private boolean trustedTrackingCaller(String supplied) {
+        return trackingInternalToken != null && !trackingInternalToken.isBlank()
+                && supplied != null
+                && MessageDigest.isEqual(
+                        trackingInternalToken.getBytes(StandardCharsets.UTF_8),
+                        supplied.getBytes(StandardCharsets.UTF_8));
+    }
 
 	
 	@GetMapping("/task-allowed-action")
@@ -1102,19 +1116,24 @@ public class ServiceMetadataController {
     
     
     @GetMapping("/internal/tracking/configured-services")
-    public ResponseEntity <List<Map<String, Object>>> getConfigureServices(@RequestParam("tenantId") String tenantId)
-    {
-    	List<Map<String,Object>> Services= serviceMetadataService.getConfiguredServices(tenantId);
-    	return ResponseEntity.ok(Services);
+    public ResponseEntity<List<Map<String, Object>>> getConfigureServices(
+            @RequestParam("tenantId") String tenantId,
+            @RequestHeader(value = "X-Tracking-Internal-Token", required = false) String token) {
+        if (!trustedTrackingCaller(token)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        return ResponseEntity.ok(serviceMetadataService.getConfiguredServices(tenantId));
     }
-    
-    
+
     @GetMapping("/internal/tracking/configuration")
-    public ResponseEntity<Map<String, Object>>getPublicTrackingConfiguration(@RequestParam("serviceId") Long serviceId, @RequestParam("tenantId") String tenantId )
-    {
-    	Map<String , Object> configuration = serviceMetadataService.getPublicTrackingConfig(serviceId, tenantId);
-    	
-    	return ResponseEntity.ok(configuration);
+    public ResponseEntity<Map<String, Object>> getPublicTrackingConfiguration(
+            @RequestParam("serviceId") Long serviceId,
+            @RequestParam("tenantId") String tenantId,
+            @RequestHeader(value = "X-Tracking-Internal-Token", required = false) String token) {
+        if (!trustedTrackingCaller(token)) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+        return ResponseEntity.ok(serviceMetadataService.getPublicTrackingConfig(serviceId, tenantId));
     }
-	
+
 }
