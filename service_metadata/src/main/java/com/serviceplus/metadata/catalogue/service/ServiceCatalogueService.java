@@ -1297,6 +1297,7 @@ public class ServiceCatalogueService {
         identity.setTenantId(log == null ? null : log.getTenantId());
         identity.setBaseServiceId(sd.getBaseServiceId());
         identity.setServiceId(sd.getServiceId());
+        identity.setDepartmentId(sd.getDepartmentId());
         identity.setServiceName(def != null && def.getName() != null ? def.getName() : sd.getServiceName());
         identity.setDepartment(department);
         identity.setState(state);
