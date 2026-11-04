@@ -84,6 +84,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.List;
 import com.serviceplus.metadata.feignClient.ProcessingFeignClient;
+import com.serviceplus.metadata.feignClient.FormDesignerFeignClient;
+import com.serviceplus.metadata.entity.ServiceTemplate;
+import com.serviceplus.metadata.repository.IServiceTemplateRepository;
 
 @Service
 public class ServiceCatalogueService {
@@ -111,12 +114,15 @@ public class ServiceCatalogueService {
 	private final IServiceChargeRepository serviceChargeRepository;
 	
 	private final ProcessingFeignClient processingFeignClient;
+	private final IServiceTemplateRepository serviceTemplateRepository;
+	private final FormDesignerFeignClient formDesignerFeignClient;
 	
 	public ServiceCatalogueService(ServiceCatalogueConfigurationRepository configurationRepository,
 			ServiceCatalogueServiceMappingRepository mappingRepository,
 			IServiceDefinitionRepository serviceDefinitionRepository, IServiceLogRepository serviceLogRepository,
 			IServiceMasterDataRepository masterDataRepository, ObjectMapper mapper, SpaAiChatbotFeignClient spaAiChatbotFeignClient,IProcessFlowRepository processFlowRepository,IServiceDeliveryUnitDefinitionRepository
-	        serviceDeliveryUnitDefinitionRepository,IServiceOutputFormatRepository serviceOutputFormatRepository,IServiceChargeRepository serviceChargeRepository,ProcessingFeignClient processingFeignClient) {
+	        serviceDeliveryUnitDefinitionRepository,IServiceOutputFormatRepository serviceOutputFormatRepository,IServiceChargeRepository serviceChargeRepository, ProcessingFeignClient processingFeignClient,
+            IServiceTemplateRepository serviceTemplateRepository, FormDesignerFeignClient formDesignerFeignClient) {
 
 		this.configurationRepository = configurationRepository;
 
@@ -136,6 +142,8 @@ public class ServiceCatalogueService {
 		this.serviceOutputFormatRepository = serviceOutputFormatRepository;
 		this.serviceChargeRepository = serviceChargeRepository;
 		this.processingFeignClient = processingFeignClient;
+		this.serviceTemplateRepository = serviceTemplateRepository;
+		this.formDesignerFeignClient = formDesignerFeignClient;
 		
 	}
 
@@ -1324,9 +1332,23 @@ public class ServiceCatalogueService {
         what.setDeliveryModes(new ArrayList<>());
         response.setWhatYouReceive(what);
 
-        // Documents: senior confirmation pending.
+        // Submission-form document requirements (s_1). No new MongoDB connection here.
         ServiceCatalogueDataDTO.Documents documents = new ServiceCatalogueDataDTO.Documents();
         documents.setItems(new ArrayList<>());
+        ServiceTemplate submissionForm = serviceTemplateRepository.findByServiceIdAndTaskId(serviceId, "s_1");
+        if (submissionForm != null && submissionForm.getFormId() != null
+                && !submissionForm.getFormId().isBlank()) {
+            if (log == null || log.getTenantId() == null || log.getTenantId().isBlank()) {
+                throw new SPRuntimeError("Service tenant is missing", HttpStatus.BAD_GATEWAY);
+            }
+            ResponseEntity<Map<String, Object>> formDocuments = formDesignerFeignClient
+                    .getCatalogueDocuments(submissionForm.getFormId(), log.getTenantId());
+            if (formDocuments == null || !formDocuments.getStatusCode().is2xxSuccessful()
+                    || formDocuments.getBody() == null) {
+                throw new SPRuntimeError("Unable to load service documents", HttpStatus.BAD_GATEWAY);
+            }
+            documents = mapper.convertValue(formDocuments.getBody(), ServiceCatalogueDataDTO.Documents.class);
+        }
         response.setDocuments(documents);
 
         return response;
