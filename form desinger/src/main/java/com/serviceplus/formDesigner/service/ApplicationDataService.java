@@ -142,6 +142,8 @@ public class ApplicationDataService {
 
     @org.springframework.beans.factory.annotation.Value("${tracking.public.strong-attributes:}")
     private String trackingStrongAttributes;
+    @org.springframework.beans.factory.annotation.Value("${TRACKING_INTERNAL_TOKEN:}")
+    private String trackingInternalToken;
     @org.springframework.beans.factory.annotation.Value("${tracking.public.max-scan-records:10000}")
     private int trackingMaxScanRecords;
 
@@ -1370,7 +1372,7 @@ public Map<String, Object> matchTrackingApplications(Map<String, Object> body) {
     int service = number.intValue();
 
     Map<String, Object> config =
-            serviceFeignClient.getPublicTrackingConfiguration((long) service, tenant);
+            serviceFeignClient.getPublicTrackingConfiguration(trackingInternalToken, (long) service, tenant);
 
     if (config == null
             || !(config.get("serviceId") instanceof Number configuredService)
